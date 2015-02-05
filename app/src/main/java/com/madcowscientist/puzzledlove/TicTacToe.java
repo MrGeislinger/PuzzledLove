@@ -1,6 +1,7 @@
 package com.madcowscientist.puzzledlove;
 
 import android.content.Intent;
+import android.os.Handler;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -24,6 +25,7 @@ public class TicTacToe extends ActionBarActivity {
     String PLAYER_O_STRING = "O";
     String[] PLAYER_STRINGS = {PLAYER_X_STRING,PLAYER_O_STRING};
     int PLAYING = PLAYER_X; //X goes first
+    boolean isSinglePlayer = true; //playing against computer (note PLAYER_X is human user)
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,10 +79,31 @@ public class TicTacToe extends ActionBarActivity {
         }
     }
 
+    /** Make a computer move **/
+    public void computerPlay() {
+
+
+    }
+
+    /** Changes PLAYING **/
+    public void changePlayingPlayer() {
+        //Change to next player
+        PLAYING = PLAYERS[(PLAYING + 1) % 2];
+        //If a single player, check if computer's move
+        if(isSinglePlayer && (PLAYING == PLAYER_O) ) {
+            //Wait some time (?)
+            //Computer plays
+            computerPlay();
+            //Change player
+            changePlayingPlayer();
+        }
+    }
+
+
     /** Called when the user clicks the button_ticTacToe# */
     public void playTicTacToeSpace(View view) {
         //Get text of the button clicked
-        Button buttonPressed = (Button) view;
+        final Button buttonPressed = (Button) view;
         String buttonValue = buttonPressed.getText().toString();
 
         //Check that space isn't already taken
@@ -88,12 +111,20 @@ public class TicTacToe extends ActionBarActivity {
             //End execution since this space has been played
             return;
         }
+        //Single Player (not their turn yet)
+        if(isSinglePlayer && (PLAYING != PLAYER_X) ) {
+            //Computer's turn so stop execution
+            return;
 
-        //Change button value depending who's turn it is (assumes not already played)
+        }
+        //Human's turn or Both Human Players
+        //Change button value depending who's turn it is (space not already played)
         buttonPressed.setText(PLAYER_STRINGS[PLAYING]);
+        //Check for winner
         //Change to next player
-        PLAYING = PLAYERS[(PLAYING + 1) % 2];
+        changePlayingPlayer();
+
+
     }
-   
 
 }
