@@ -27,23 +27,12 @@ public class TicTacToe extends ActionBarActivity {
     String[] PLAYER_STRINGS = {PLAYER_X_STRING,PLAYER_O_STRING};
     int PLAYING = PLAYER_X; //X goes first
     boolean isSinglePlayer = true; //playing against computer (note PLAYER_X is human user)
-    List<Button> availableMoves = new ArrayList<Button>();  //list of available moves
+    ArrayList<Button> availableMoves = new ArrayList<Button>();  //list of available moves
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tic_tac_toe);
-        //Add  to availableMoves list
-        String buttonId = "button_ticTacToe";
-        int resID = 0;
-        for(int i=0;i<9;i++){
-            //Make the button id
-            buttonId += i;
-            resID = getResources().getIdentifier(buttonId, "id", "com.madcowscientst.puzzledLove");
-            //Add into list
-            availableMoves.add((Button) findViewById(resID));
-        }
-        availableMoves.add((Button) findViewById(R.id.button_ticTacToe0);
 
         //Get intent from previous activity
         Intent intent = getIntent();
@@ -54,6 +43,21 @@ public class TicTacToe extends ActionBarActivity {
         }
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        //Add  to availableMoves list
+        String buttonIdBase = "button_ticTacToe";
+        String buttonId = "";
+        int resID = 0;
+        for(int i=0;i<9;i++){
+            //Make the button id
+            buttonId = buttonIdBase+i;
+            resID = getResources().getIdentifier(buttonId, "id", getPackageName());
+            //Add into list
+            availableMoves.add((Button) findViewById(resID));
+        }
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -91,16 +95,32 @@ public class TicTacToe extends ActionBarActivity {
             View rootView = inflater.inflate(R.layout.fragment_tic_tac_toe, container, false);
             return rootView;
         }
+
+
+
     }
 
     /** Make a computer move **/
-    public void computerPlay() {
-        //Only use available moves
-        //Play a move
+    public Button computerPlay() {
+        Button spacePlayed = null;
+        boolean taken = true;
+        //Takes the first available move
+        for(Button move : availableMoves) {
+            taken = move.getText().toString().equals(PLAYER_O_STRING) ||
+                    move.getText().toString().equals(PLAYER_X_STRING);
+            if (!taken) {
+                spacePlayed = move;
+                break;
+            }
+        }
+        //Change text
+        spacePlayed.setText(PLAYER_STRINGS[PLAYING]);
+        //Return what move was played
+        return spacePlayed;
     }
 
     /** Changes PLAYING **/
-    public void changePlayingPlayer() {
+    public void changePlayingPlayer(Button spacePlayed) {
         //Change to next player
         PLAYING = PLAYERS[(PLAYING + 1) % 2];
         //If a single player, check if computer's move
@@ -112,9 +132,9 @@ public class TicTacToe extends ActionBarActivity {
                 public void run() {
                     //Wait 500ms before playing
                     //Computer plays
-                    computerPlay();
+                    Button chosenSpace = computerPlay();
                     //Change player
-                    changePlayingPlayer();
+                    changePlayingPlayer(chosenSpace);
                 }
             }, 500);
 
@@ -124,6 +144,7 @@ public class TicTacToe extends ActionBarActivity {
 
     /** Called when the user clicks the button_ticTacToe# */
     public void playTicTacToeSpace(View view) {
+        System.out.println(availableMoves);
         //Get text of the button clicked
         final Button buttonPressed = (Button) view;
         String buttonValue = buttonPressed.getText().toString();
@@ -144,7 +165,7 @@ public class TicTacToe extends ActionBarActivity {
         buttonPressed.setText(PLAYER_STRINGS[PLAYING]);
         //Check for winner
         //Change to next player
-        changePlayingPlayer();
+        changePlayingPlayer(buttonPressed);
 
 
     }
