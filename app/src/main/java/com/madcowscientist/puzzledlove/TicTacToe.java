@@ -82,7 +82,6 @@ public class TicTacToe extends ActionBarActivity {
     /** Make a computer move **/
     public void computerPlay() {
 
-
     }
 
     /** Changes PLAYING **/
@@ -92,10 +91,18 @@ public class TicTacToe extends ActionBarActivity {
         //If a single player, check if computer's move
         if(isSinglePlayer && (PLAYING == PLAYER_O) ) {
             //Wait some time (?)
-            //Computer plays
-            computerPlay();
-            //Change player
-            changePlayingPlayer();
+            final Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    //Wait 500ms before playing
+                    //Computer plays
+                    computerPlay();
+                    //Change player
+                    changePlayingPlayer();
+                }
+            }, 500);
+
         }
     }
 
