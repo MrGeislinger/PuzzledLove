@@ -1,0 +1,112 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="com.madcowscientist.puzzledlove.TicTacToe$PlaceholderFragment">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/tic_tac_toe_title"
+        android:id="@+id/textView_Title"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:textColor="#ffff53b7"
+        android:textIsSelectable="true"
+        android:textSize="50sp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/buttonText_ticTacToe1"
+        android:id="@+id/button_ticTacToe1"
+        android:onClick="playTicTacToeSpace"
+        android:layout_marginTop="71dp"
+        android:layout_below="@+id/textView_Title"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/buttonText_ticTacToe0"
+        android:id="@+id/button_ticTacToe0"
+        android:onClick="playTicTacToeSpace"
+        android:layout_alignBottom="@+id/button_ticTacToe1"
+        android:layout_toLeftOf="@+id/button_ticTacToe1"
+        android:layout_toStartOf="@+id/button_ticTacToe1" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/buttonText_ticTacToe3"
+        android:id="@+id/button_ticTacToe3"
+        android:onClick="playTicTacToeSpace"
+        android:layout_below="@+id/button_ticTacToe1"
+        android:layout_alignLeft="@+id/button_ticTacToe0"
+        android:layout_alignStart="@+id/button_ticTacToe0" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/buttonText_ticTacToe4"
+        android:id="@+id/button_ticTacToe4"
+        android:onClick="playTicTacToeSpace"
+        android:layout_alignBottom="@+id/button_ticTacToe3"
+        android:layout_alignLeft="@+id/button_ticTacToe1"
+        android:layout_alignStart="@+id/button_ticTacToe1" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/buttonText_ticTacToe5"
+        android:id="@+id/button_ticTacToe5"
+        android:onClick="playTicTacToeSpace"
+        android:layout_alignBottom="@+id/button_ticTacToe4"
+        android:layout_toRightOf="@+id/button_ticTacToe4"
+        android:layout_toEndOf="@+id/button_ticTacToe4" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/buttonText_ticTacToe2"
+        android:id="@+id/button_ticTacToe2"
+        android:onClick="playTicTacToeSpace"
+        android:layout_above="@+id/button_ticTacToe5"
+        android:layout_toRightOf="@+id/button_ticTacToe1"
+        android:layout_toEndOf="@+id/button_ticTacToe1" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/buttonText_ticTacToe6"
+        android:id="@+id/button_ticTacToe6"
+        android:onClick="playTicTacToeSpace"
+        android:layout_below="@+id/button_ticTacToe3"
+        android:layout_alignLeft="@+id/button_ticTacToe3"
+        android:layout_alignStart="@+id/button_ticTacToe3" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/buttonText_ticTacToe7"
+        android:id="@+id/button_ticTacToe7"
+        android:onClick="playTicTacToeSpace"
+        android:layout_alignBottom="@+id/button_ticTacToe6"
+        android:layout_toRightOf="@+id/button_ticTacToe6"
+        android:layout_toEndOf="@+id/button_ticTacToe6" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/buttonText_ticTacToe8"
+        android:id="@+id/button_ticTacToe8"
+        android:onClick="playTicTacToeSpace"
+        android:layout_alignBottom="@+id/button_ticTacToe7"
+        android:layout_toRightOf="@+id/button_ticTacToe7"
+        android:layout_toEndOf="@+id/button_ticTacToe7" />
+
+</RelativeLayout>

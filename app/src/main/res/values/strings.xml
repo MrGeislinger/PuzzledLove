@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Puzzled Love</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_levels">LevelsActivity</string>
+    <string name="levelsTitle">Game Levels!!</string>
+    <string name="title_activity_tic_tac_toe">TicTacToe</string>
+    <string name="tic_tac_toe_title">Tic-Tac-Beau</string>
+    <string name="buttonText_ticTacToe0" > </string>
+    <string name="buttonText_ticTacToe1" > </string>
+    <string name="buttonText_ticTacToe2" > </string>
+    <string name="buttonText_ticTacToe3" > </string>
+    <string name="buttonText_ticTacToe4" > </string>
+    <string name="buttonText_ticTacToe5" > </string>
+    <string name="buttonText_ticTacToe6" > </string>
+    <string name="buttonText_ticTacToe7" > </string>
+    <string name="buttonText_ticTacToe8" > </string>
+
+</resources>
