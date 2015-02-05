@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.os.Build;
 import android.widget.Button;
+import java.util.*;
 
 
 public class TicTacToe extends ActionBarActivity {
@@ -26,11 +27,24 @@ public class TicTacToe extends ActionBarActivity {
     String[] PLAYER_STRINGS = {PLAYER_X_STRING,PLAYER_O_STRING};
     int PLAYING = PLAYER_X; //X goes first
     boolean isSinglePlayer = true; //playing against computer (note PLAYER_X is human user)
+    List<Button> availableMoves = new ArrayList<Button>();  //list of available moves
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tic_tac_toe);
+        //Add  to availableMoves list
+        String buttonId = "button_ticTacToe";
+        int resID = 0;
+        for(int i=0;i<9;i++){
+            //Make the button id
+            buttonId += i;
+            resID = getResources().getIdentifier(buttonId, "id", "com.madcowscientst.puzzledLove");
+            //Add into list
+            availableMoves.add((Button) findViewById(resID));
+        }
+        availableMoves.add((Button) findViewById(R.id.button_ticTacToe0);
+
         //Get intent from previous activity
         Intent intent = getIntent();
         if (savedInstanceState == null) {
@@ -81,7 +95,8 @@ public class TicTacToe extends ActionBarActivity {
 
     /** Make a computer move **/
     public void computerPlay() {
-
+        //Only use available moves
+        //Play a move
     }
 
     /** Changes PLAYING **/
