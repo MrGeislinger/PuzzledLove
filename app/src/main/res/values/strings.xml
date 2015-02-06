@@ -17,5 +17,6 @@
     <string name="buttonText_ticTacToe6" > </string>
     <string name="buttonText_ticTacToe7" > </string>
     <string name="buttonText_ticTacToe8" > </string>
+    <string name="buttonText_ticTacToeReset">Reset Game</string>
 
 </resources>

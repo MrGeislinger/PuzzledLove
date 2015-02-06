@@ -109,4 +109,14 @@
         android:layout_toRightOf="@+id/button_ticTacToe7"
         android:layout_toEndOf="@+id/button_ticTacToe7" />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/buttonText_ticTacToeReset"
+        android:id="@+id/button_ticTacToeReset"
+        android:layout_below="@+id/button_ticTacToe6"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="92dp"
+        android:visibility="invisible" />
+
 </RelativeLayout>

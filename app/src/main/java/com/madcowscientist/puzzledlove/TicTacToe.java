@@ -197,8 +197,6 @@ public class TicTacToe extends ActionBarActivity {
             return false;
         }
         System.out.println("============Won==============");
-        //Change to 'neither' player
-        PLAYING = -1;
         //Display winning message
         AlertDialog alertDialog = new AlertDialog.Builder(TicTacToe.this).create();
         //(Human) X won in single player mode
@@ -221,8 +219,12 @@ public class TicTacToe extends ActionBarActivity {
             alertDialog.setTitle("Winner!");
             alertDialog.setMessage("Player 2 has won the game!!!");
         }
+        //Change to 'neither' player
+        PLAYING = -1;
         //Game was won (show dialog)
         alertDialog.show();
+        //Show reset game button
+        findViewById(R.id.button_ticTacToeReset).setVisibility(View.VISIBLE);
         return true;
     }
     /** Make a computer move **/
@@ -270,7 +272,7 @@ public class TicTacToe extends ActionBarActivity {
                     //Change player
                     changePlayingPlayer(view,chosenSpace);
                 }
-            }, 1000);
+            }, 500);
 
         }
     }
@@ -298,8 +300,8 @@ public class TicTacToe extends ActionBarActivity {
         buttonPressed.setText(PLAYER_STRINGS[PLAYING]);
         //Change to next player
         changePlayingPlayer(view,buttonPressed);
-
-
     }
+
+
 
 }
