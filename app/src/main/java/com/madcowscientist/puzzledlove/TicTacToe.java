@@ -1,5 +1,7 @@
 package com.madcowscientist.puzzledlove;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Handler;
 import android.support.v7.app.ActionBarActivity;
@@ -177,13 +179,47 @@ public class TicTacToe extends ActionBarActivity {
     }
 
     /** Game logic for when game has been won **/
-    public void gameWon(){
-        if( (winBy("diagonal")!=null) ||
-                (winBy("row")!=null) ||
-                (winBy("column")!=null)
-                ){
-            System.out.println("==================\nWON!!!\n===============");
+    public void gameWon(View v){
+        //Check if won by anyone (by any means)
+        String winner;
+        Button winnerDiag,winnerRow,winnerCol;
+        winnerDiag = winBy("diagonal");
+        winnerRow  = winBy("row");
+        winnerCol  = winBy("column");
+
+        if(winnerDiag != null){
+            winner = winnerDiag.getText().toString();
+        } else if(winnerRow != null){
+            winner = winnerRow.getText().toString();
+        } else if(winnerCol != null){
+            winner = winnerCol.getText().toString();
+        } else { //no winner
+            return;
         }
+        System.out.println("============Won==============");
+        //Display winning message
+        AlertDialog alertDialog = new AlertDialog.Builder(TicTacToe.this).create();
+        //(Human) X won in single player mode
+        if(winner.equals("X") && isSinglePlayer) {
+            alertDialog.setTitle("You Won!");
+            alertDialog.setMessage("You won the game! You can got play another game now!");
+        }
+        //X won in 2 player game
+        else if(winner.equals("X") && !isSinglePlayer){
+            alertDialog.setTitle("Winner!");
+            alertDialog.setMessage("Player 1 has won the game!!!");
+        }
+        //Computer won
+        else if(isSinglePlayer) {
+            alertDialog.setTitle("Better luck next time...");
+            alertDialog.setMessage("Sorry, but the computer won the game...");
+        }
+        //(Human) O won in 2 player game
+        else {
+            alertDialog.setTitle("Winner!");
+            alertDialog.setMessage("Player 2 has won the game!!!");
+        }
+        alertDialog.show();  //<-- See This!
     }
     /** Make a computer move **/
     public Button computerPlay() {
@@ -205,9 +241,9 @@ public class TicTacToe extends ActionBarActivity {
     }
 
     /** Changes PLAYING **/
-    public void changePlayingPlayer(Button spacePlayed) {
+    public void changePlayingPlayer(final View view, Button spacePlayed) {
         //Check for won game
-        gameWon();
+        gameWon(view);
         //Change to next player
         PLAYING = PLAYERS[(PLAYING + 1) % 2];
         //If a single player, check if computer's move
@@ -221,7 +257,7 @@ public class TicTacToe extends ActionBarActivity {
                     //Computer plays
                     Button chosenSpace = computerPlay();
                     //Change player
-                    changePlayingPlayer(chosenSpace);
+                    changePlayingPlayer(view,chosenSpace);
                 }
             }, 1000);
 
@@ -250,7 +286,7 @@ public class TicTacToe extends ActionBarActivity {
         //Change button value depending who's turn it is (space not already played)
         buttonPressed.setText(PLAYER_STRINGS[PLAYING]);
         //Change to next player
-        changePlayingPlayer(buttonPressed);
+        changePlayingPlayer(view,buttonPressed);
 
 
     }
