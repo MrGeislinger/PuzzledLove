@@ -198,7 +198,13 @@ public class TicTacToe extends ActionBarActivity {
         }
         System.out.println("============Won==============");
         //Display winning message
-        AlertDialog.Builder alertDialog = new AlertDialog.Builder(TicTacToe.this);//.create();
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(TicTacToe.this);
+        //Reset button in dialog
+        alertDialog.setPositiveButton("Reset Game", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                resetGame();
+            }
+        });
         //(Human) X won in single player mode
         if(winner.equals("X") && isSinglePlayer) {
             alertDialog.setTitle("You Won!");
