@@ -28,6 +28,7 @@ public class TicTacToe extends ActionBarActivity {
     int PLAYING = PLAYER_X; //X goes first
     boolean isSinglePlayer = true; //playing against computer (note PLAYER_X is human user)
     ArrayList<Button> availableMoves = new ArrayList<Button>();  //list of available moves
+    Random rand = new Random();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,6 +101,99 @@ public class TicTacToe extends ActionBarActivity {
 
     }
 
+    /** General function to check if there is a winner for a given line
+     * Input: starting position and increment
+     * Output: null if no winner, else the button 'owned' by winner
+     */
+    public Button checkWin(int startPos, int incBy){
+        //Default winner
+        Button winner = availableMoves.get(startPos);
+        //Check that it's not blank
+        if(winner.getText().toString().equals("")){
+            return null;
+        }
+
+        //Check with the starting position
+        for(int i=startPos;i<9;i+=incBy) {
+            //Assume a win until the next one doesn't match
+            if(!winner.getText().equals( availableMoves.get(i).getText() )){
+                //hasWon = true;
+           /// }
+            //Next spot doesn't match; must be a loser
+            //else {
+                return null;
+            }
+        }
+        //No  player has won, set to null
+
+
+        System.out.println(winner.getText().toString());
+        return winner;
+    }
+
+    /* Returns the button that won */
+    public Button winBy(String winType){
+        Button winner = null;
+        boolean hasWon = false;
+
+        //Win on Diagonal
+        if(winType.equals("diagonal")){
+            //Start at left-top
+            winner = checkWin(0,4);
+            //Break out if won, else check next
+            if(winner != null){
+                System.out.println(0);
+                return winner;
+            }
+            //Start at right-top
+            winner = checkWin(2,2);
+            //Return winner if won
+            if(winner != null){
+                System.out.println(0);
+                return winner;
+            }
+        }
+        //Win on row
+        else if(winType.equals("row")){
+            //test for each row
+            for(int rowStart=0;rowStart<9; rowStart+=3){
+                //Test the whole row
+                winner = checkWin(rowStart,1);
+                //Return winner if won, else check next
+                if(winner != null){
+
+                    System.out.println(1);return winner;
+                }
+            }
+        }
+        //Win on column
+        else if(winType.equals("column")){
+            //test for each column
+            for(int colStart=0;colStart<4; colStart++){
+                //Test the whole column
+                winner = checkWin(colStart,3);
+                //Return winner if won, else check next
+                if(winner != null){
+                    System.out.println(2);return winner;
+                }
+            }
+        }
+        //Mistake in input
+        else{
+            winner = null;
+        }
+        //No winner found (returning null)
+        return winner;
+    }
+
+    public void gameWon(){
+        if( (winBy("diagonal")!=null) ||
+                (winBy("row")!=null) ||
+                (winBy("column")!=null)
+                ){
+            System.out.println("==================\nWON!!!\n===============");
+        }
+    }
     /** Make a computer move **/
     public Button computerPlay() {
         Button spacePlayed = null;
@@ -121,6 +215,11 @@ public class TicTacToe extends ActionBarActivity {
 
     /** Changes PLAYING **/
     public void changePlayingPlayer(Button spacePlayed) {
+        //Check for won game
+        gameWon();
+
+        System.out.print("Player played: ");
+        System.out.println(spacePlayed);
         //Change to next player
         PLAYING = PLAYERS[(PLAYING + 1) % 2];
         //If a single player, check if computer's move
@@ -136,7 +235,7 @@ public class TicTacToe extends ActionBarActivity {
                     //Change player
                     changePlayingPlayer(chosenSpace);
                 }
-            }, 500);
+            }, 7000);
 
         }
     }
@@ -144,7 +243,6 @@ public class TicTacToe extends ActionBarActivity {
 
     /** Called when the user clicks the button_ticTacToe# */
     public void playTicTacToeSpace(View view) {
-        System.out.println(availableMoves);
         //Get text of the button clicked
         final Button buttonPressed = (Button) view;
         String buttonValue = buttonPressed.getText().toString();
@@ -164,6 +262,7 @@ public class TicTacToe extends ActionBarActivity {
         //Change button value depending who's turn it is (space not already played)
         buttonPressed.setText(PLAYER_STRINGS[PLAYING]);
         //Check for winner
+
         //Change to next player
         changePlayingPlayer(buttonPressed);
 
