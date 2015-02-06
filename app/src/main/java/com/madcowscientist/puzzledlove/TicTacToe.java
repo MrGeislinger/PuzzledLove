@@ -250,6 +250,8 @@ public class TicTacToe extends ActionBarActivity {
         if(bestMove != null) {return bestMove;}
         bestMove = emptyCorner();
         if(bestMove != null) {return bestMove;}
+        bestMove = emptySide();
+        if(bestMove != null) {return bestMove;}
         //Temporary
         //Takes the first available move
         boolean taken = true;
@@ -286,7 +288,19 @@ public class TicTacToe extends ActionBarActivity {
         } else if(availableMoves.get(8).getText().equals("")) {
             return availableMoves.get(8);
         }
+        //No corner is open
+        return null;
+    }
 
+    /** Check if corner is open */
+    public Button emptySide() {
+        for(int i=1; i<9; i+=2){
+            //Found empty space
+            if(availableMoves.get(i).getText().equals("")){
+                return availableMoves.get(i);
+            }
+        }
+        //No side is open
         return null;
     }
 
