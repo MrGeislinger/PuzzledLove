@@ -112,22 +112,15 @@ public class TicTacToe extends ActionBarActivity {
         if(winner.getText().toString().equals("")){
             return null;
         }
-
         //Check with the starting position
-        for(int i=startPos;i<9;i+=incBy) {
+        for(int i=startPos;i<(startPos+3*incBy);i+=incBy) {
             //Assume a win until the next one doesn't match
             if(!winner.getText().equals( availableMoves.get(i).getText() )){
-                //hasWon = true;
-           /// }
-            //Next spot doesn't match; must be a loser
-            //else {
+                //Next spot doesn't match; must be a loser
                 return null;
             }
         }
         //No  player has won, set to null
-
-
-        System.out.println(winner.getText().toString());
         return winner;
     }
 
@@ -142,14 +135,12 @@ public class TicTacToe extends ActionBarActivity {
             winner = checkWin(0,4);
             //Break out if won, else check next
             if(winner != null){
-                System.out.println(0);
                 return winner;
             }
             //Start at right-top
             winner = checkWin(2,2);
             //Return winner if won
             if(winner != null){
-                System.out.println(0);
                 return winner;
             }
         }
@@ -161,8 +152,7 @@ public class TicTacToe extends ActionBarActivity {
                 winner = checkWin(rowStart,1);
                 //Return winner if won, else check next
                 if(winner != null){
-
-                    System.out.println(1);return winner;
+                    return winner;
                 }
             }
         }
@@ -174,7 +164,7 @@ public class TicTacToe extends ActionBarActivity {
                 winner = checkWin(colStart,3);
                 //Return winner if won, else check next
                 if(winner != null){
-                    System.out.println(2);return winner;
+                    return winner;
                 }
             }
         }
@@ -186,6 +176,7 @@ public class TicTacToe extends ActionBarActivity {
         return winner;
     }
 
+    /** Game logic for when game has been won **/
     public void gameWon(){
         if( (winBy("diagonal")!=null) ||
                 (winBy("row")!=null) ||
@@ -217,9 +208,6 @@ public class TicTacToe extends ActionBarActivity {
     public void changePlayingPlayer(Button spacePlayed) {
         //Check for won game
         gameWon();
-
-        System.out.print("Player played: ");
-        System.out.println(spacePlayed);
         //Change to next player
         PLAYING = PLAYERS[(PLAYING + 1) % 2];
         //If a single player, check if computer's move
@@ -235,7 +223,7 @@ public class TicTacToe extends ActionBarActivity {
                     //Change player
                     changePlayingPlayer(chosenSpace);
                 }
-            }, 7000);
+            }, 1000);
 
         }
     }
@@ -261,8 +249,6 @@ public class TicTacToe extends ActionBarActivity {
         //Human's turn or Both Human Players
         //Change button value depending who's turn it is (space not already played)
         buttonPressed.setText(PLAYER_STRINGS[PLAYING]);
-        //Check for winner
-
         //Change to next player
         changePlayingPlayer(buttonPressed);
 
