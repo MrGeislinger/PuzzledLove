@@ -222,7 +222,7 @@ public class TicTacToe extends ActionBarActivity {
         }
         //(Human) O won in 2 player game
         else {
-            alertDialog.setTitle("Winner!");
+            alertDialog.setTitle("Winner!");//.create();
             alertDialog.setMessage("Player 2 has won the game!!!");
         }
         //Change to 'neither' player
@@ -317,7 +317,7 @@ public class TicTacToe extends ActionBarActivity {
     }
 
     /** Resets game on button press */
-    public void resetGameOnPress(View v){
+    public void resetGameOnPress(View view){
         resetGame();
     }
 

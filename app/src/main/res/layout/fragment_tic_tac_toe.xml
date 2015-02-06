@@ -114,7 +114,7 @@
         android:layout_height="wrap_content"
         android:text="@string/buttonText_ticTacToeReset"
         android:id="@+id/button_ticTacToeReset"
-        android:onClick="resetGame"
+        android:onClick="resetGameOnPress"
         android:layout_below="@+id/button_ticTacToe6"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="92dp"
