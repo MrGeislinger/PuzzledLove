@@ -179,7 +179,7 @@ public class TicTacToe extends ActionBarActivity {
     }
 
     /** Game logic for when game has been won **/
-    public void gameWon(View v){
+    public boolean gameWon(View v){
         //Check if won by anyone (by any means)
         String winner;
         Button winnerDiag,winnerRow,winnerCol;
@@ -194,7 +194,7 @@ public class TicTacToe extends ActionBarActivity {
         } else if(winnerCol != null){
             winner = winnerCol.getText().toString();
         } else { //no winner
-            return;
+            return false;
         }
         System.out.println("============Won==============");
         //Display winning message
@@ -219,7 +219,9 @@ public class TicTacToe extends ActionBarActivity {
             alertDialog.setTitle("Winner!");
             alertDialog.setMessage("Player 2 has won the game!!!");
         }
-        alertDialog.show();  //<-- See This!
+        //Game was won (show dialog)
+        alertDialog.show();
+        return true;
     }
     /** Make a computer move **/
     public Button computerPlay() {
@@ -243,7 +245,10 @@ public class TicTacToe extends ActionBarActivity {
     /** Changes PLAYING **/
     public void changePlayingPlayer(final View view, Button spacePlayed) {
         //Check for won game
-        gameWon(view);
+        if( gameWon(view) ) {
+            //Stop game execution
+            return;
+        };
         //Change to next player
         PLAYING = PLAYERS[(PLAYING + 1) % 2];
         //If a single player, check if computer's move
