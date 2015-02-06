@@ -243,13 +243,38 @@ public class TicTacToe extends ActionBarActivity {
      *   6. Empty side exists                  -> take it
      ******************************************************/
 
+    /** Computer's best move **/
+    public Button bestComputerMove() {
+        Button bestMove = null;
+        bestMove = emptyCenter();
+        if(bestMove != null) {return bestMove;}
+        bestMove = emptyCorner();
+        if(bestMove != null) {return bestMove;}
+        //No move
+        return null;
+    }
+
     /** Check if middle taken */
-    public boolean isCenterEmpty(){
+    public Button emptyCenter(){
         Button center = availableMoves.get(4);
         if(center.getText().toString().equals("")){
-            return true;
+            return center;
         }
-        return false;
+        return null;
+    }
+
+    /** Check if corner is open */
+    public Button emptyCorner() {
+        if(availableMoves.get(0).getText().equals("")){
+            return availableMoves.get(0);
+        } else if(availableMoves.get(2).getText().equals("")){
+            return availableMoves.get(2);
+        } else if(availableMoves.get(6).getText().equals("")) {
+            return availableMoves.get(6);
+        } else if(availableMoves.get(8).getText().equals("")) {
+            return availableMoves.get(8);
+        }
+        return null;
     }
 
 
@@ -257,13 +282,9 @@ public class TicTacToe extends ActionBarActivity {
     public Button computerPlay() {
         Button spacePlayed = null;
         boolean taken = true;
-        //Take the middle if available
-        if(isCenterEmpty()){
-
-            spacePlayed = availableMoves.get(4);
-        }
+        spacePlayed = bestComputerMove();
         //Takes the first available move
-        else {
+        if(spacePlayed == null) {
             for (Button move : availableMoves) {
                 taken = move.getText().toString().equals(PLAYER_O_STRING) ||
                         move.getText().toString().equals(PLAYER_X_STRING);
