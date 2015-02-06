@@ -240,8 +240,16 @@ public class TicTacToe extends ActionBarActivity {
                 break;
             }
         }
-        //Check if there are no spaces left (halt execution)
+        //Check if there are no spaces left
         if(spacePlayed == null){
+            //Show dialog
+            AlertDialog alertDialog = new AlertDialog.Builder(TicTacToe.this).create();
+            alertDialog.setTitle("Tied Game");
+            alertDialog.setMessage("Maybe play again?");
+            alertDialog.show();
+            //Show reset game button
+            findViewById(R.id.button_ticTacToeReset).setVisibility(View.VISIBLE);
+            //Halt execution
             return null;
         }
         //Change text
