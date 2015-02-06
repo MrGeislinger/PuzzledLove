@@ -236,6 +236,10 @@ public class TicTacToe extends ActionBarActivity {
                 break;
             }
         }
+        //Check if there are no spaces left (halt execution)
+        if(spacePlayed == null){
+            return null;
+        }
         //Change text
         spacePlayed.setText(PLAYER_STRINGS[PLAYING]);
         //Return what move was played
