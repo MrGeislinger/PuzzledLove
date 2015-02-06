@@ -310,6 +310,15 @@ public class TicTacToe extends ActionBarActivity {
         changePlayingPlayer(view,buttonPressed);
     }
 
+    /** Resets game */
+    public void resetGame(View view) {
+        //Reset board
+        for(Button b : availableMoves){
+            b.setText("");
+        }
+        //Start with PLAYER_X
+        PLAYING = PLAYER_X;
 
+    }
 
 }
