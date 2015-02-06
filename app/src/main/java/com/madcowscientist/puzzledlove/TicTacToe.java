@@ -197,6 +197,8 @@ public class TicTacToe extends ActionBarActivity {
             return false;
         }
         System.out.println("============Won==============");
+        //Change to 'neither' player
+        PLAYING = -1;
         //Display winning message
         AlertDialog alertDialog = new AlertDialog.Builder(TicTacToe.this).create();
         //(Human) X won in single player mode
