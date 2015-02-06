@@ -161,7 +161,7 @@ public class TicTacToe extends ActionBarActivity {
         //Win on column
         else if(winType.equals("column")){
             //test for each column
-            for(int colStart=0;colStart<4; colStart++){
+            for(int colStart=0;colStart<3; colStart++){
                 //Test the whole column
                 winner = checkWin(colStart,3);
                 //Return winner if won, else check next
@@ -233,6 +233,8 @@ public class TicTacToe extends ActionBarActivity {
         findViewById(R.id.button_ticTacToeReset).setVisibility(View.VISIBLE);
         return true;
     }
+
+
     /** Make a computer move **/
     public Button computerPlay() {
         Button spacePlayed = null;
@@ -246,7 +248,7 @@ public class TicTacToe extends ActionBarActivity {
                 break;
             }
         }
-        //Check if there are no spaces left
+        //Check if there are no spaces left (always on PLAYER_O's turn)
         if(spacePlayed == null){
             //Show dialog
             AlertDialog alertDialog = new AlertDialog.Builder(TicTacToe.this).create();
