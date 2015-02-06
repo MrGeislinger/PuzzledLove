@@ -198,7 +198,7 @@ public class TicTacToe extends ActionBarActivity {
         }
         System.out.println("============Won==============");
         //Display winning message
-        AlertDialog alertDialog = new AlertDialog.Builder(TicTacToe.this).create();
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(TicTacToe.this);//.create();
         //(Human) X won in single player mode
         if(winner.equals("X") && isSinglePlayer) {
             alertDialog.setTitle("You Won!");
@@ -310,15 +310,19 @@ public class TicTacToe extends ActionBarActivity {
         changePlayingPlayer(view,buttonPressed);
     }
 
+    /** Resets game on button press */
+    public void resetGameOnPress(View v){
+        resetGame();
+    }
+
     /** Resets game */
-    public void resetGame(View view) {
+    public void resetGame() {
         //Reset board
         for(Button b : availableMoves){
             b.setText("");
         }
         //Start with PLAYER_X
         PLAYING = PLAYER_X;
-
     }
 
 }
