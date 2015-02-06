@@ -234,18 +234,43 @@ public class TicTacToe extends ActionBarActivity {
         return true;
     }
 
+    /** Computer play logic (ordered by best move)
+     *   1. Can get three in a row             -> take it
+     *   2. Block a three in a row             -> take it
+     *   3. Center is open                     -> take it
+     *   4. Opposite of opponent's corner open -> take it
+     *   5. Empty corner exists                -> take it
+     *   6. Empty side exists                  -> take it
+     ******************************************************/
+
+    /** Check if middle taken */
+    public boolean isCenterEmpty(){
+        Button center = availableMoves.get(4);
+        if(center.getText().toString().equals("")){
+            return true;
+        }
+        return false;
+    }
+
 
     /** Make a computer move **/
     public Button computerPlay() {
         Button spacePlayed = null;
         boolean taken = true;
+        //Take the middle if available
+        if(isCenterEmpty()){
+
+            spacePlayed = availableMoves.get(4);
+        }
         //Takes the first available move
-        for(Button move : availableMoves) {
-            taken = move.getText().toString().equals(PLAYER_O_STRING) ||
-                    move.getText().toString().equals(PLAYER_X_STRING);
-            if (!taken) {
-                spacePlayed = move;
-                break;
+        else {
+            for (Button move : availableMoves) {
+                taken = move.getText().toString().equals(PLAYER_O_STRING) ||
+                        move.getText().toString().equals(PLAYER_X_STRING);
+                if (!taken) {
+                    spacePlayed = move;
+                    break;
+                }
             }
         }
         //Check if there are no spaces left (always on PLAYER_O's turn)
