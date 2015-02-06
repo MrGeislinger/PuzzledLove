@@ -250,6 +250,18 @@ public class TicTacToe extends ActionBarActivity {
         if(bestMove != null) {return bestMove;}
         bestMove = emptyCorner();
         if(bestMove != null) {return bestMove;}
+        //Temporary
+        //Takes the first available move
+        boolean taken = true;
+        if(bestMove == null) {
+            for (Button move : availableMoves) {
+                taken = move.getText().toString().equals(PLAYER_O_STRING) ||
+                        move.getText().toString().equals(PLAYER_X_STRING);
+                if (!taken) {
+                    return move;
+                }
+            }
+        }
         //No move
         return null;
     }
@@ -274,6 +286,7 @@ public class TicTacToe extends ActionBarActivity {
         } else if(availableMoves.get(8).getText().equals("")) {
             return availableMoves.get(8);
         }
+
         return null;
     }
 
@@ -281,19 +294,8 @@ public class TicTacToe extends ActionBarActivity {
     /** Make a computer move **/
     public Button computerPlay() {
         Button spacePlayed = null;
-        boolean taken = true;
+        //Play best move
         spacePlayed = bestComputerMove();
-        //Takes the first available move
-        if(spacePlayed == null) {
-            for (Button move : availableMoves) {
-                taken = move.getText().toString().equals(PLAYER_O_STRING) ||
-                        move.getText().toString().equals(PLAYER_X_STRING);
-                if (!taken) {
-                    spacePlayed = move;
-                    break;
-                }
-            }
-        }
         //Check if there are no spaces left (always on PLAYER_O's turn)
         if(spacePlayed == null){
             //Show dialog
