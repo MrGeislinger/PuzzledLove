@@ -111,7 +111,7 @@ public class TicTacToe extends ActionBarActivity {
         //Default winner
         Button winner = availableMoves.get(startPos);
         //Check that it's not blank
-        if(winner.getText().toString().equals("")){
+        if(isSpaceOpen(winner)){
             return null;
         }
         //Check with the starting position
@@ -284,13 +284,13 @@ public class TicTacToe extends ActionBarActivity {
 
     /** Check if corner is open */
     public Button emptyCorner() {
-        if(availableMoves.get(0).getText().equals("")){
+        if(isSpaceOpen(availableMoves.get(0))){
             return availableMoves.get(0);
-        } else if(availableMoves.get(2).getText().equals("")){
+        } else if(isSpaceOpen(availableMoves.get(2))){
             return availableMoves.get(2);
-        } else if(availableMoves.get(6).getText().equals("")) {
+        } else if(isSpaceOpen(availableMoves.get(6))) {
             return availableMoves.get(6);
-        } else if(availableMoves.get(8).getText().equals("")) {
+        } else if(isSpaceOpen(availableMoves.get(8))) {
             return availableMoves.get(8);
         }
         //No corner is open
@@ -301,7 +301,7 @@ public class TicTacToe extends ActionBarActivity {
     public Button emptySide() {
         for(int i=1; i<9; i+=2){
             //Found empty space
-            if(availableMoves.get(i).getText().equals("")){
+            if(isSpaceOpen(availableMoves.get(i))){
                 return availableMoves.get(i);
             }
         }
