@@ -276,7 +276,7 @@ public class TicTacToe extends ActionBarActivity {
     /** Check if middle taken */
     public Button emptyCenter(){
         Button center = availableMoves.get(4);
-        if(center.getText().toString().equals("")){
+        if(isSpaceOpen(center)){
             return center;
         }
         return null;
