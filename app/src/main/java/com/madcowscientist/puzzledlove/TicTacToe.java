@@ -234,6 +234,23 @@ public class TicTacToe extends ActionBarActivity {
         return true;
     }
 
+    /** What is player on space
+     *  -1 if not occupied
+     *
+     * */
+    public int playerOnSpace(Button space) {
+        int player = -1
+        if(space.getText().toString().equals(PLAYER_X_STRING)) {
+            return PLAYER_X;
+        } else if(space.getText().toString().equals(PLAYER_O_STRING)) {
+            return PLAYER_O;
+        }
+        //Not occupied
+        return -1;
+    }
+
+
+
     /** Computer play logic (ordered by best move)
      *   1. Can get three in a row             -> take it
      *   2. Block a three in a row             -> take it
