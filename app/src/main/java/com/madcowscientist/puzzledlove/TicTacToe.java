@@ -398,7 +398,7 @@ public class TicTacToe extends ActionBarActivity {
     public void resetGame() {
         //Reset board
         for(Button b : availableMoves){
-            b.setText("");
+            makeSpaceOpen(b);
         }
         //Hide reset game button
         findViewById(R.id.button_ticTacToeReset).setVisibility(View.INVISIBLE);
