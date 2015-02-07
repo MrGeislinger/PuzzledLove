@@ -322,7 +322,13 @@ public class TicTacToe extends ActionBarActivity {
         //Check if there are no spaces left (always on PLAYER_O's turn)
         if(spacePlayed == null){
             //Show dialog
-            AlertDialog alertDialog = new AlertDialog.Builder(TicTacToe.this).create();
+            AlertDialog.Builder alertDialog = new AlertDialog.Builder(TicTacToe.this);
+            //Reset button in dialog
+            alertDialog.setPositiveButton("Reset Game", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    resetGame();
+                }
+            });
             alertDialog.setTitle("Tied Game");
             alertDialog.setMessage("Maybe play again?");
             alertDialog.show();
