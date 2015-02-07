@@ -248,8 +248,6 @@ public class TicTacToe extends ActionBarActivity {
         return PLAYER_BLANK;
     }
 
-
-
     /** Computer play logic (ordered by best move)
      *   1. Can get three in a row             -> take it
      *   2. Block a three in a row             -> take it
@@ -263,6 +261,8 @@ public class TicTacToe extends ActionBarActivity {
     public Button bestComputerMove() {
         Button bestMove = null;
         bestMove = emptyCenter();
+        if(bestMove != null) {return bestMove;}
+        bestMove = emptyOppositeCorner(PLAYER_X);
         if(bestMove != null) {return bestMove;}
         bestMove = emptyCorner();
         if(bestMove != null) {return bestMove;}
@@ -291,7 +291,27 @@ public class TicTacToe extends ActionBarActivity {
 
     /** Reset a space back to open/available */
     public void makeSpaceOpen(Button space) {
-        space.setText("");
+        space.setText(PLAYER_BLANK_STRING);
+    }
+
+
+    /** Check if opposite corner of enemy is open */
+    public Button emptyOppositeCorner(int enemy) {
+        if(isSpaceOpen(availableMoves.get(0)) &&
+           (playerOnSpace(availableMoves.get(8)) == enemy) ) {
+            return availableMoves.get(0);
+        } else if(isSpaceOpen(availableMoves.get(8)) &&
+                (playerOnSpace(availableMoves.get(0)) == enemy) ) {
+            return availableMoves.get(8);
+        } else if(isSpaceOpen(availableMoves.get(2)) &&
+                (playerOnSpace(availableMoves.get(6)) == enemy) ) {
+            return availableMoves.get(2);
+        } else if(isSpaceOpen(availableMoves.get(6)) &&
+                (playerOnSpace(availableMoves.get(2)) == enemy) ) {
+            return availableMoves.get(6);
+        }
+        //No corner is open
+        return null;
     }
 
     /** Check if middle taken */
