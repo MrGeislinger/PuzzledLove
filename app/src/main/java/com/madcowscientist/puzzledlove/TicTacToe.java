@@ -268,6 +268,11 @@ public class TicTacToe extends ActionBarActivity {
         return null;
     }
 
+    /** Check if given square is open */
+    public boolean isSpaceOpen(Button space) {
+        return space.getText().equals("");
+    }
+
     /** Check if middle taken */
     public Button emptyCenter(){
         Button center = availableMoves.get(4);
@@ -303,7 +308,6 @@ public class TicTacToe extends ActionBarActivity {
         //No side is open
         return null;
     }
-
 
     /** Make a computer move **/
     public Button computerPlay() {
