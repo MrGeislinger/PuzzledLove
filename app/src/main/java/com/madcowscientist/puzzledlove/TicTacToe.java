@@ -23,9 +23,11 @@ public class TicTacToe extends ActionBarActivity {
     //Global definitions
     int PLAYER_X = 0; //X goes first
     int PLAYER_O = 1;
+    int PLAYER_BLANK = -1;
     int[] PLAYERS = {PLAYER_X,PLAYER_O};
     String PLAYER_X_STRING = "X";
     String PLAYER_O_STRING = "O";
+    String PLAYER_BLANK_STRING = "";
     String[] PLAYER_STRINGS = {PLAYER_X_STRING,PLAYER_O_STRING};
     int PLAYING = PLAYER_X; //X goes first
     boolean isSinglePlayer = true; //playing against computer (note PLAYER_X is human user)
@@ -234,19 +236,16 @@ public class TicTacToe extends ActionBarActivity {
         return true;
     }
 
-    /** What is player on space
-     *  -1 if not occupied
-     *
-     * */
+    /** What is player on space */
     public int playerOnSpace(Button space) {
-        int player = -1
+        int player = -1;
         if(space.getText().toString().equals(PLAYER_X_STRING)) {
             return PLAYER_X;
         } else if(space.getText().toString().equals(PLAYER_O_STRING)) {
             return PLAYER_O;
         }
         //Not occupied
-        return -1;
+        return PLAYER_BLANK;
     }
 
 
@@ -287,7 +286,7 @@ public class TicTacToe extends ActionBarActivity {
 
     /** Check if given square is open */
     public boolean isSpaceOpen(Button space) {
-        return space.getText().equals("");
+        return (playerOnSpace(space) == PLAYER_BLANK);
     }
 
     /** Reset a space back to open/available */
