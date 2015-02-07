@@ -273,6 +273,11 @@ public class TicTacToe extends ActionBarActivity {
         return space.getText().equals("");
     }
 
+    /** Reset a space back to open/available */
+    public void makeSpaceOpen(Button space) {
+        space.setText("");
+    }
+
     /** Check if middle taken */
     public Button emptyCenter(){
         Button center = availableMoves.get(4);
