@@ -451,10 +451,10 @@ public class TicTacToe extends ActionBarActivity {
     public void playTicTacToeSpace(View view) {
         //Get text of the button clicked
         final Button buttonPressed = (Button) view;
-        String buttonValue = buttonPressed.getText().toString();
+        int player = playerOnSpace(buttonPressed);
 
         //Check that space isn't already taken
-        if(buttonValue.equals(PLAYER_X_STRING) || buttonValue.equals(PLAYER_O_STRING)) {
+        if( player == PLAYER_BLANK) {
             //End execution since this space has been played
             return;
         }
