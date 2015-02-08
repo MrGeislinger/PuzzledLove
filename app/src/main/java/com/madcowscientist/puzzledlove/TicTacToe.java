@@ -119,7 +119,7 @@ public class TicTacToe extends ActionBarActivity {
         //Check with the starting position
         for(int i=startPos;i<(startPos+3*incBy);i+=incBy) {
             //Assume a win until the next one doesn't match
-            if(!winner.getText().equals( availableMoves.get(i).getText() )){
+            if(playerOnSpace(winner) != playerOnSpace(availableMoves.get(i)) ) {
                 //Next spot doesn't match; must be a loser
                 return null;
             }
