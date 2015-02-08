@@ -295,26 +295,26 @@ public class TicTacToe extends ActionBarActivity {
                     return space;
                 }
             }
-            //First space was not blank
-            else {
-                //Store next two spaces
-                Button space1 = availableMoves.get(i+3);
-                Button space2 = availableMoves.get(i+6);
-                //Defaults to null for space below does not match above
-
-                //Space below is a blank
-                if( PLAYER_BLANK == playerOnSpace(space1) ) {
-                    //3rd space below matches, so return the blank space
-                    if(playerOnSpace(space2) == player) { space = space1; }
-                }
-                //Space below matches
-                else if( player == playerOnSpace(space1) ) {
-                    //If last space is blank, return it
-                    if(playerOnSpace(space2) == PLAYER_BLANK) { space = space2; }
-                }
-                //Gives space
-                return space;
-            }
+//            //First space was not blank
+//            else {
+//                //Store next two spaces
+//                Button space1 = availableMoves.get(i+3);
+//                Button space2 = availableMoves.get(i+6);
+//                //Defaults to null for space below does not match above
+//
+//                //Space below is a blank
+//                if( PLAYER_BLANK == playerOnSpace(space1) ) {
+//                    //3rd space below matches, so return the blank space
+//                    if(playerOnSpace(space2) == player) { space = space1; }
+//                }
+//                //Space below matches
+//                else if( player == playerOnSpace(space1) ) {
+//                    //If last space is blank, return it
+//                    if(playerOnSpace(space2) == PLAYER_BLANK) { space = space2; }
+//                }
+//                //Gives space
+//                return space;
+//            }
         }
         //Test all rows
         //Test all diagonals
