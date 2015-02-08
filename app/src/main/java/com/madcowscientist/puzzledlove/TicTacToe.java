@@ -288,8 +288,6 @@ public class TicTacToe extends ActionBarActivity {
             if(player == PLAYER_BLANK) {
                 //Get the space below
                 player = playerOnSpace(availableMoves.get(i+3));
-                System.out.print(i);
-                System.out.println(player);
                 //The last two spaces are not occupied by the same player
                 if( (player == PLAYER_BLANK) ||
                     (player != playerOnSpace(availableMoves.get(i+6))) ) {
@@ -312,12 +310,12 @@ public class TicTacToe extends ActionBarActivity {
                 //Space below is a blank
                 if( PLAYER_BLANK == playerOnSpace(space1) ) {
                     //3rd space below matches, so return the blank space
-                    if(playerOnSpace(space2) == player) { space = space1; }
+                    if(playerOnSpace(space2) == player) { return space1; }
                 }
                 //Space below matches
                 else if( player == playerOnSpace(space1) ) {
                     //If last space is blank, return it
-                    if(playerOnSpace(space2) == PLAYER_BLANK) { space = space2; }
+                    if(playerOnSpace(space2) == PLAYER_BLANK) { return space2; }
                 }
             }
         }
