@@ -119,7 +119,7 @@ public class TicTacToe extends ActionBarActivity {
         //Check with the starting position
         for(int i=startPos;i<(startPos+3*incBy);i+=incBy) {
             //Assume a win until the next one doesn't match
-            if(!winner.getText().equals( availableMoves.get(i).getText() )){
+            if(playerOnSpace(winner) != playerOnSpace(availableMoves.get(i)) ) {
                 //Next spot doesn't match; must be a loser
                 return null;
             }
@@ -260,6 +260,8 @@ public class TicTacToe extends ActionBarActivity {
     /** Computer's best move **/
     public Button bestComputerMove() {
         Button bestMove = null;
+        bestMove = potentialWin();
+        if(bestMove != null) {return bestMove;}
         bestMove = emptyCenter();
         if(bestMove != null) {return bestMove;}
         bestMove = emptyOppositeCorner(PLAYER_X);
@@ -268,20 +270,58 @@ public class TicTacToe extends ActionBarActivity {
         if(bestMove != null) {return bestMove;}
         bestMove = emptySide();
         if(bestMove != null) {return bestMove;}
-        //Temporary
-        //Takes the first available move
-        boolean taken = true;
-        if(bestMove == null) {
-            for (Button move : availableMoves) {
-                taken = move.getText().toString().equals(PLAYER_O_STRING) ||
-                        move.getText().toString().equals(PLAYER_X_STRING);
-                if (!taken) {
-                    return move;
-                }
-            }
-        }
         //No move
         return null;
+    }
+
+    /** Returns a button for a potential win for a given player */
+    public Button potentialWin() {
+        //Empty space for potential win
+        Button space = null;
+
+        //Test for all the columns
+        for(int i=0; i<3; i++) {
+            //Store the first space
+            space = availableMoves.get(i);
+            int player = playerOnSpace(space);
+            //If first space is blank
+            if(player == PLAYER_BLANK) {
+                //Get the space below    
+                player = playerOnSpace(availableMoves.get(i+3));
+                //The last two spaces are both occupied by the same player
+                if( (player != PLAYER_BLANK) &&
+                    (player == availableMoves.get(i+6) ) {
+                    //Return the empty space
+                    return space;
+                }
+            } 
+            //First space was not blank
+            else {
+                //Store next two spaces
+                Button space1 = availableMoves.get(i+3);
+                Button space2 = availableMoves.get(i+6);
+                //Defaults to null for space below does not match above
+                
+                //Space below is a blank
+                if( PLAYER_BLANK == playerOnSpace(space1) ) {
+                    //3rd space below matches, so return the blank space
+                    if(playerOnSpace(space2) == player) { space = space1; }
+                }
+                //Space below matches
+                else if( player == playerOnSpace(space1) ) {
+                    //If last space is blank, return it
+                    if(playerOnSpace(space2) == PLAYER_BLANK) { space = space2; }
+                }
+                //Gives space
+                return space;
+            }
+
+            //Test all rows
+            //Test all diagonals
+            
+            //No finishing moves
+            return null;
+        }
     }
 
     /** Returns a button for a potential win for a given player */
@@ -463,10 +503,10 @@ public class TicTacToe extends ActionBarActivity {
     public void playTicTacToeSpace(View view) {
         //Get text of the button clicked
         final Button buttonPressed = (Button) view;
-        String buttonValue = buttonPressed.getText().toString();
+        int player = playerOnSpace(buttonPressed);
 
         //Check that space isn't already taken
-        if(buttonValue.equals(PLAYER_X_STRING) || buttonValue.equals(PLAYER_O_STRING)) {
+        if( player == PLAYER_BLANK) {
             //End execution since this space has been played
             return;
         }
