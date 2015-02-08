@@ -284,6 +284,58 @@ public class TicTacToe extends ActionBarActivity {
         return null;
     }
 
+    /** Returns a button for a potential win for a given player */
+    public Button potentialWin() {
+        //Empty space for potential win
+        Button space = null;
+
+        //Test for all the columns
+        for(int i=0; i<3; i++) {
+            //Store the first space
+            int player = playerOnSpace(space);
+            //If first space is blank
+            if(player == PLAYER_BLANK) {
+                //Store the blank space
+                space = availableMoves.get(i);
+                //Get the space below    
+                player = playerOnSpace(availableMoves.get(i+3));
+                //The last two spaces are both occupied by the same player
+                if( (player != PLAYER_BLANK) &&
+                    (player == playerOnSpace(availableMoves.get(i+6))) ) {
+                    //Return the empty space
+                    return space;
+                }
+            } 
+            //First space was not blank
+            else {
+                //Store next two spaces
+                Button space1 = availableMoves.get(i+3);
+                Button space2 = availableMoves.get(i+6);
+                //Space below does not match above
+                if( ( player != playerOnSpace(space1) ) &&
+                    ( PLAYER_BLANK != playerOnSpace(space1) ) ) {
+                    //Give no space                
+                    return space;
+                }
+                //Space below is a blank
+                else if( ( PLAYER_BLANK == playerOnSpace(space1) ) ) {
+                    //3rd space below matches, so return the blank space
+                    if(playerOnSpace(space2) == player) { space = space1; }
+                    return space;
+                }
+                //Space below matches
+                else {
+                    //If last space is blank, return it
+                    if(playerOnSpace(space2) == PLAYER_BLANK) { space = space2; }
+                    return space;
+                }
+            }
+        }
+        //Test all rows
+        //Test all diagonals
+        return space;
+    }
+
     /** Check if given square is open */
     public boolean isSpaceOpen(Button space) {
         return (playerOnSpace(space) == PLAYER_BLANK);
