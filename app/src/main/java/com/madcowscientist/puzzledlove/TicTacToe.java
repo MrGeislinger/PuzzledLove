@@ -268,18 +268,6 @@ public class TicTacToe extends ActionBarActivity {
         if(bestMove != null) {return bestMove;}
         bestMove = emptySide();
         if(bestMove != null) {return bestMove;}
-        //Temporary
-        //Takes the first available move
-        boolean taken = true;
-        if(bestMove == null) {
-            for (Button move : availableMoves) {
-                taken = move.getText().toString().equals(PLAYER_O_STRING) ||
-                        move.getText().toString().equals(PLAYER_X_STRING);
-                if (!taken) {
-                    return move;
-                }
-            }
-        }
         //No move
         return null;
     }
