@@ -320,6 +320,32 @@ public class TicTacToe extends ActionBarActivity {
             }
         }
         //Test all rows
+        for(int i=0; i<9; i+=3) {
+            //Store the first space
+            space = availableMoves.get(i);
+            int player = playerOnSpace(space);
+            //Check each corresponding space
+            Button space1 = availableMoves.get(i+1);
+            Button space2 = availableMoves.get(i+2);
+
+            //First space is empty
+            if(player == PLAYER_BLANK) {
+                //Get the space to the right
+                player = playerOnSpace(space1);
+                //The last two spaces are not occupied by the same player
+                if( (player == PLAYER_BLANK) ||
+                    (player != playerOnSpace(space2)) ) {
+                    //Return the empty space
+                    space = null;
+                }
+                //Potential winning space found
+                else {
+                    //
+                    return space;
+                }
+            }
+
+        }
         //Test all diagonals
 
         //Returns space
