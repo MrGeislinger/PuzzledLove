@@ -362,6 +362,47 @@ public class TicTacToe extends ActionBarActivity {
 
         }
         //Test all diagonals
+        for(int i=0; i<3; i+=2) {
+            //Store the first space
+            space = availableMoves.get(i);
+            int player = playerOnSpace(space);
+            //Check each corresponding space
+            Button space1 = availableMoves.get(4);
+            Button space2 = availableMoves.get(8-i);
+
+            //First space is empty
+            if(player == PLAYER_BLANK) {
+                //Get the space to the right
+                player = playerOnSpace(space1);
+                //The last two spaces are not occupied by the same player
+                if( (player == PLAYER_BLANK) ||
+                        (player != playerOnSpace(space2)) ) {
+                    //Return the empty space
+                    space = null;
+                }
+                //Potential winning space found
+                else {
+                    //
+                    return space;
+                }
+            }
+            //First space was not blank
+            else {
+                //Defaults to null when next space does not match above
+                space = null;
+                //Next space is a blank
+                if( PLAYER_BLANK == playerOnSpace(space1) ) {
+                    //3rd space below matches, so return the blank space
+                    if(playerOnSpace(space2) == player) { return space1; }
+                }
+                //Space below matches
+                else if( player == playerOnSpace(space1) ) {
+                    //If last space is blank, return it
+                    if(playerOnSpace(space2) == PLAYER_BLANK) { return space2; }
+                }
+            }
+
+        }
 
         //Returns space
         return space;
