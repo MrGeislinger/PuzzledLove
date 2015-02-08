@@ -344,6 +344,21 @@ public class TicTacToe extends ActionBarActivity {
                     return space;
                 }
             }
+            //First space was not blank
+            else {
+                //Defaults to null when next space does not match above
+                space = null;
+                //Next space is a blank
+                if( PLAYER_BLANK == playerOnSpace(space1) ) {
+                    //3rd space below matches, so return the blank space
+                    if(playerOnSpace(space2) == player) { return space1; }
+                }
+                //Space below matches
+                else if( player == playerOnSpace(space1) ) {
+                    //If last space is blank, return it
+                    if(playerOnSpace(space2) == PLAYER_BLANK) { return space2; }
+                }
+            }
 
         }
         //Test all diagonals
