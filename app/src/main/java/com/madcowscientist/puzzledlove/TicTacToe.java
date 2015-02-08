@@ -280,49 +280,45 @@ public class TicTacToe extends ActionBarActivity {
         //Test for all the columns
         for(int i=0; i<3; i++) {
             //Store the first space
+            space = availableMoves.get(i);
             int player = playerOnSpace(space);
             //If first space is blank
             if(player == PLAYER_BLANK) {
-                //Store the blank space
-                space = availableMoves.get(i);
                 //Get the space below    
                 player = playerOnSpace(availableMoves.get(i+3));
                 //The last two spaces are both occupied by the same player
                 if( (player != PLAYER_BLANK) &&
                     (player == availableMoves.get(i+6) ) {
                     //Return the empty space
-                    return space
+                    return space;
                 }
             } 
             //First space was not blank
             else {
-                //Increase since we found one
-                found++;
                 //Store next two spaces
                 Button space1 = availableMoves.get(i+3);
                 Button space2 = availableMoves.get(i+6);
-                //Space below does not match above
-                if( ( player != playerOnSpace(space1) ) &&
-                    ( PLAYER_BLANK != playerOnSpace(space1) ) ) {
-                    //Give no space                
-                    return space;
-                }
+                //Defaults to null for space below does not match above
+                
                 //Space below is a blank
-                else if( ( PLAYER_BLANK == playerOnSpace(space1) ) ) {
+                if( PLAYER_BLANK == playerOnSpace(space1) ) {
                     //3rd space below matches, so return the blank space
                     if(playerOnSpace(space2) == player) { space = space1; }
-                    return space;
                 }
                 //Space below matches
-                else {
+                else if( player == playerOnSpace(space1) ) {
                     //If last space is blank, return it
-                    if(playerOnSpace(space2 == PLAYER_BLANK) { space = space2; }
-                    return space;
+                    if(playerOnSpace(space2) == PLAYER_BLANK) { space = space2; }
                 }
+                //Gives space
+                return space;
             }
 
             //Test all rows
             //Test all diagonals
+            
+            //No finishing moves
+            return null;
         }
     }
 
