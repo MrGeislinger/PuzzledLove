@@ -454,7 +454,7 @@ public class TicTacToe extends ActionBarActivity {
         int player = playerOnSpace(buttonPressed);
 
         //Check that space isn't already taken
-        if( player == PLAYER_BLANK) {
+        if( player != PLAYER_BLANK) {
             //End execution since this space has been played
             return;
         }
