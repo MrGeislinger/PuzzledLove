@@ -260,6 +260,8 @@ public class TicTacToe extends ActionBarActivity {
     /** Computer's best move **/
     public Button bestComputerMove() {
         Button bestMove = null;
+        bestMove = potentialWin();
+        if(bestMove != null) {return bestMove;}
         bestMove = emptyCenter();
         if(bestMove != null) {return bestMove;}
         bestMove = emptyOppositeCorner(PLAYER_X);
