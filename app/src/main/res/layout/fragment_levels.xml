@@ -24,9 +24,69 @@
         android:layout_height="wrap_content"
         android:id="@+id/button_goToTicTacToe"
         android:onClick="goToTicTacToe"
+        android:src="@drawable/unlock"
         android:layout_below="@+id/textView_levelsTitle"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="37dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/GameSubTitle_TicTacToe"
+        android:id="@+id/textView"
         android:layout_alignLeft="@+id/textView_levelsTitle"
         android:layout_alignStart="@+id/textView_levelsTitle"
-        android:layout_marginTop="36dp"
-        android:src="@drawable/lock" />
+        android:textSize="30sp"
+        android:layout_alignTop="@+id/button_goToTicTacToe"
+        android:layout_alignBottom="@+id/button_goToTicTacToe"
+        android:layout_toLeftOf="@+id/button_goToTicTacToe"
+        android:layout_toStartOf="@+id/button_goToTicTacToe" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/button_goToTicTacToeMedia"
+        android:onClick="goToTicTacToe"
+        android:src="@drawable/play"
+        android:layout_alignTop="@+id/button_goToTicTacToe"
+        android:layout_toRightOf="@+id/button_goToTicTacToe"
+        android:layout_alignBottom="@+id/button_goToTicTacToe"
+        android:layout_alignRight="@+id/button_goToHangManMedia"
+        android:layout_alignEnd="@+id/button_goToHangManMedia" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/GameSubTitle_HangMan"
+        android:id="@+id/textView2"
+        android:textSize="30sp"
+        android:layout_below="@+id/button_goToTicTacToe"
+        android:layout_alignLeft="@+id/textView"
+        android:layout_alignStart="@+id/textView"
+        android:layout_marginTop="42dp"
+        android:layout_toLeftOf="@+id/button_goToTicTacToe"
+        android:layout_toStartOf="@+id/button_goToTicTacToe" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/button_goToHangMan"
+        android:onClick="goToTicTacToe"
+        android:src="@drawable/lock"
+        android:layout_alignTop="@+id/textView2"
+        android:layout_toRightOf="@+id/textView2"
+        android:layout_toEndOf="@+id/textView2" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/button_goToHangManMedia"
+        android:onClick="goToTicTacToe"
+        android:src="@drawable/play"
+        android:layout_alignTop="@+id/button_goToHangMan"
+        android:layout_toRightOf="@+id/button_goToHangMan"
+        android:layout_toEndOf="@+id/button_goToHangMan"
+        android:layout_alignBottom="@+id/button_goToHangMan" />
 </RelativeLayout>

@@ -403,7 +403,6 @@ public class TicTacToe extends ActionBarActivity {
             }
 
         }
-
         //Returns space
         return space;
     }
