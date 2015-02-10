@@ -3,6 +3,7 @@ package com.madcowscientist.puzzledlove;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -18,9 +19,8 @@ import android.os.Build;
 public class MainActivity extends ActionBarActivity {
 
     //Unlocks Preferences
-    SharedPreferences UNLOCKED_LEVELS = getSharedPreferences(
-            "UNLOCKED_LEVELS", Context.MODE_PRIVATE);
-    public final SharedPreferences.Editor UnlockedEditor = UNLOCKED_LEVELS.edit();
+    SharedPreferences UNLOCKED_LEVELS;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,12 +32,17 @@ public class MainActivity extends ActionBarActivity {
                     .commit();
         }
 
+        //Set the shared preferences
+        UNLOCKED_LEVELS = getSharedPreferences("UNLOCKED_LEVELS", Context.MODE_PRIVATE);
+        Editor UnlockedEditor = UNLOCKED_LEVELS.edit();
+
         //Check if the preferences have been set
         if (!UNLOCKED_LEVELS.contains("TicTacToeUNLOCKED")) {
             UnlockedEditor.putBoolean("TicTacToeUNLOCKED", true);
             UnlockedEditor.putBoolean("TicTacToeMediaUNLOCKED", false);
             UnlockedEditor.putBoolean("HangmanUNLOCKED", false);
             UnlockedEditor.putBoolean("HangmanMediaUNLOCKED", false);
+            UnlockedEditor.commit();
         }
 
     }
