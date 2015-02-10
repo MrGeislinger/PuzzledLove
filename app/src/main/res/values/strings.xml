@@ -19,6 +19,6 @@
     <string name="buttonText_ticTacToe8" > </string>
     <string name="buttonText_ticTacToeReset">Reset Game</string>
     <string name="GameSubTitle_TicTacToe">Tic Tac Beau</string>
-    <string name="GameSubTitle_HangMan">Break My Heart</string>
+    <string name="GameSubTitle_Hangman">Break My Heart</string>
 
 </resources>
