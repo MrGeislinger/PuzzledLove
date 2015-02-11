@@ -20,7 +20,8 @@ public class MainActivity extends ActionBarActivity {
 
     //Unlocks Preferences
     SharedPreferences UNLOCKED_LEVELS;
-
+    //Setup info to be used at beginnning
+    SharedPreferences SETUP_INFO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +46,17 @@ public class MainActivity extends ActionBarActivity {
             UnlockedEditor.commit();
         }
 
+        //Setup checks
+        SETUP_INFO = getSharedPreferences("SETUP_INFO", Context.MODE_PRIVATE);
+        Editor SetupEditor = SETUP_INFO.edit();
+        
+        if (!SETUP_INFO.contains("User")) {
+            SetupEditor.putString("User", null);
+            SetupEditor.putString("Lover", null);
+            SetupEditor.putString("Hangman_Question", "Question not set");
+            SetupEditor.putString("Hangman_Answer", null);
+
+        }
     }
 
 
