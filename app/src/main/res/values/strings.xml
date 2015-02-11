@@ -22,5 +22,6 @@
     <string name="GameSubTitle_Hangman">Break My Heart</string>
     <string name="title_activity_hangman">Hangman</string>
     <string name="hangman_title">Break My Heart</string>
+    <string name="questionText">Question</string>
 
 </resources>
