@@ -41,4 +41,26 @@
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
 
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/letterGuess"
+        android:gravity="center_vertical|center_horizontal"
+        android:maxLength="1"
+        android:text=""
+        android:layout_alignParentBottom="true"
+        android:layout_alignLeft="@+id/hangman_heart"
+        android:layout_alignStart="@+id/hangman_heart"
+        android:layout_toLeftOf="@+id/button"
+        android:layout_toStartOf="@+id/button" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Guess"
+        android:id="@+id/button"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/hangman_heart"
+        android:layout_alignEnd="@+id/hangman_heart" />
+
 </RelativeLayout>
