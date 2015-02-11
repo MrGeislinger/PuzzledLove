@@ -1,8 +1,10 @@
 package com.madcowscientist.puzzledlove;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Handler;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
@@ -19,6 +21,9 @@ import java.util.*;
 
 
 public class TicTacToe extends ActionBarActivity {
+
+    //Unlocks Preferences
+    public SharedPreferences UNLOCKED_LEVELS;
 
     //Global definitions
     int PLAYER_X = 0; //X goes first
@@ -198,7 +203,7 @@ public class TicTacToe extends ActionBarActivity {
         } else { //no winner
             return false;
         }
-        System.out.println("============Won==============");
+
         //Display winning message
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(TicTacToe.this);
         //Reset button in dialog
@@ -209,8 +214,16 @@ public class TicTacToe extends ActionBarActivity {
         });
         //(Human) X won in single player mode
         if(winner.equals("X") && isSinglePlayer) {
+            //Set the shared preferences
+            UNLOCKED_LEVELS = getSharedPreferences("UNLOCKED_LEVELS", Context.MODE_PRIVATE);
+            SharedPreferences.Editor UnlockedEditor = UNLOCKED_LEVELS.edit();
+            //Allow user to view media & new game since she won1
+            UnlockedEditor.putBoolean("TicTacToeMediaUNLOCKED", true);
+            UnlockedEditor.putBoolean("HangmanUNLOCKED", true);
+            UnlockedEditor.commit();
+
             alertDialog.setTitle("You Won!");
-            alertDialog.setMessage("You won the game! You can got play another game now!");
+            alertDialog.setMessage("You won the game! You can go play another game now!");
         }
         //X won in 2 player game
         else if(winner.equals("X") && !isSinglePlayer){

@@ -22,7 +22,6 @@ import static com.madcowscientist.puzzledlove.R.drawable.unlock;
 public class LevelsActivity extends ActionBarActivity {
 
     //Unlocks Preferences
-
     public SharedPreferences UNLOCKED_LEVELS;
 
     //Array of level strings
@@ -37,7 +36,7 @@ public class LevelsActivity extends ActionBarActivity {
         setContentView(R.layout.activity_levels);
         //Get intent from previous activity
         Intent intent = getIntent();
-
+        System.out.println("Create=====================");
         setButtonImages();
     }
 
@@ -64,6 +63,19 @@ public class LevelsActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        System.out.println("Start=====================");
+        setButtonImages();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        System.out.println("Resume=====================");
+        setButtonImages();
+    }
 
     /** Called when the user clicks the button_goToTicTacToe */
     public void goToTicTacToe(View view) {
