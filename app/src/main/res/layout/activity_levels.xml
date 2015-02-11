@@ -34,7 +34,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/GameSubTitle_TicTacToe"
-        android:id="@+id/textView"
+        android:id="@+id/GameSubTitle_TicTacToe"
         android:layout_alignLeft="@+id/textView_levelsTitle"
         android:layout_alignStart="@+id/textView_levelsTitle"
         android:textSize="30sp"
@@ -60,11 +60,11 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/GameSubTitle_Hangman"
-        android:id="@+id/textView2"
+        android:id="@+id/GameSubTitle_Hangman"
         android:textSize="30sp"
         android:layout_below="@+id/button_goToTicTacToe"
-        android:layout_alignLeft="@+id/textView"
-        android:layout_alignStart="@+id/textView"
+        android:layout_alignLeft="@+id/GameSubTitle_TicTacToe"
+        android:layout_alignStart="@+id/GameSubTitle_TicTacToe"
         android:layout_marginTop="42dp"
         android:layout_toLeftOf="@+id/button_goToTicTacToe"
         android:layout_toStartOf="@+id/button_goToTicTacToe" />
@@ -75,9 +75,9 @@
         android:id="@+id/button_goToHangman"
         android:onClick="goToTicTacToe"
         android:src="@drawable/lock"
-        android:layout_alignTop="@+id/textView2"
-        android:layout_toRightOf="@+id/textView2"
-        android:layout_toEndOf="@+id/textView2" />
+        android:layout_alignTop="@+id/GameSubTitle_Hangman"
+        android:layout_toRightOf="@+id/GameSubTitle_Hangman"
+        android:layout_toEndOf="@+id/GameSubTitle_Hangman" />
 
     <ImageButton
         android:layout_width="wrap_content"
