@@ -1,6 +1,8 @@
 package com.madcowscientist.puzzledlove;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -11,9 +13,23 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.os.Build;
+import android.widget.Button;
+import android.widget.ImageButton;
+
+import static com.madcowscientist.puzzledlove.R.drawable.unlock;
 
 
 public class LevelsActivity extends ActionBarActivity {
+
+    //Unlocks Preferences
+
+    public SharedPreferences UNLOCKED_LEVELS;
+
+    //Array of level strings
+    String[] LevelStrings = {
+        "TicTacToe",
+        "Hangman"
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,11 +37,8 @@ public class LevelsActivity extends ActionBarActivity {
         setContentView(R.layout.activity_levels);
         //Get intent from previous activity
         Intent intent = getIntent();
-        if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.container, new PlaceholderFragment())
-                    .commit();
-        }
+
+        setButtonImages();
     }
 
 
@@ -51,26 +64,53 @@ public class LevelsActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-    public static class PlaceholderFragment extends Fragment {
-
-        public PlaceholderFragment() {
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_levels, container, false);
-            return rootView;
-        }
-    }
 
     /** Called when the user clicks the button_goToTicTacToe */
     public void goToTicTacToe(View view) {
         Intent intent = new Intent(this, TicTacToe.class);
         startActivity(intent);
+    }
+
+
+    public void setButtonImages() {
+        //Set the shared preferences
+        UNLOCKED_LEVELS = getSharedPreferences("UNLOCKED_LEVELS", Context.MODE_PRIVATE);
+        SharedPreferences.Editor UnlockedEditor = UNLOCKED_LEVELS.edit();
+
+        //Check the unlocked preferences to update the (game & media) buttons
+        int resGameID, resMediaID;
+        ImageButton tempGameButton, tempMediaButton;
+        for(String level : LevelStrings) {
+            //Set game & media button
+            resGameID = getResources().getIdentifier(
+                    "button_goTo" + level, "id", getPackageName());
+            resMediaID = getResources().getIdentifier(
+                    "button_goTo" + level + "Media", "id", getPackageName());
+            tempGameButton = (ImageButton) findViewById(resGameID);
+            tempMediaButton = (ImageButton) findViewById(resMediaID);
+
+            //Check game buttons
+            //Set to locked icon
+            if(UNLOCKED_LEVELS.getBoolean(level + "UNLOCKED", false)) {
+                System.out.print(tempGameButton);
+                tempGameButton.setImageResource(R.drawable.unlock);
+                System.out.println(" - end");
+            }
+            //Set to unlocked icon
+            else {
+                tempGameButton.setImageResource(R.drawable.lock);
+            }
+
+            //Check media buttons
+            //Set to locked icon
+            if(UNLOCKED_LEVELS.getBoolean(level + "MediaUNLOCKED", false)) {
+               tempMediaButton.setImageResource(R.drawable.play);
+            }
+            //Set to unlocked media icon
+            else {
+                tempMediaButton.setImageResource(R.drawable.lock);
+            }
+        }
     }
 
 }

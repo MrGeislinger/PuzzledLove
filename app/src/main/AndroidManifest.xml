@@ -34,6 +34,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.madcowscientist.puzzledlove.LevelsActivity" />
         </activity>
+        <activity
+            android:name=".Hangman"
+            android:label="@string/title_activity_hangman"
+            android:parentActivityName=".LevelsActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.madcowscientist.puzzledlove.LevelsActivity" />
+        </activity>
     </application>
 
 </manifest>
