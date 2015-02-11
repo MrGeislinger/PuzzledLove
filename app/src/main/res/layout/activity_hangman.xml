@@ -63,4 +63,19 @@
         android:layout_alignRight="@+id/hangman_heart"
         android:layout_alignEnd="@+id/hangman_heart" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/guessProgress"
+        android:id="@+id/guessProgress_TextView"
+        android:layout_below="@+id/questionTextView"
+        android:layout_marginTop="36dp"
+        android:layout_above="@+id/button"
+        android:layout_alignLeft="@+id/textView_Title"
+        android:layout_alignStart="@+id/textView_Title"
+        android:layout_alignRight="@+id/textView_Title"
+        android:layout_alignEnd="@+id/textView_Title"
+        android:gravity="center" />
+
 </RelativeLayout>
