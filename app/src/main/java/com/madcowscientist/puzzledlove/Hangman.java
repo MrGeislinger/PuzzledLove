@@ -1,5 +1,6 @@
 package com.madcowscientist.puzzledlove;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -12,8 +13,10 @@ public class Hangman extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hangman);
-    }
 
+        //Get intent from previous activity
+        Intent intent = getIntent();
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

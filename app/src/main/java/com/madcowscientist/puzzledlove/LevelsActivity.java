@@ -83,6 +83,12 @@ public class LevelsActivity extends ActionBarActivity {
         startActivity(intent);
     }
 
+    /** Called when the user clicks the button_goToTicTacToe */
+    public void goToHangman(View view) {
+        Intent intent = new Intent(this, Hangman.class);
+        startActivity(intent);
+    }
+
 
     public void setButtonImages() {
         //Set the shared preferences

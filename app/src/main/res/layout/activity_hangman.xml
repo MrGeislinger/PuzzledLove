@@ -13,21 +13,21 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/hangman_title"
         android:id="@+id/textView_Title"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="33dp"
         android:textColor="#ffff53b7"
         android:textIsSelectable="true"
-        android:textSize="50sp" />
+        android:textSize="45sp"
+        android:gravity="center|fill_horizontal"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 
     <ImageButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/hangman_heart"
+        android:background="@drawable/heart0"
         android:layout_below="@+id/textView_Title"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="36dp"
-        android:background="@drawable/heart0" />
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -35,12 +35,10 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/questionText"
         android:id="@+id/questionTextView"
-        android:layout_below="@+id/hangman_heart"
-        android:layout_centerHorizontal="true"
         android:textStyle="bold"
-        android:layout_alignParentEnd="false"
-        android:layout_alignParentStart="false"
         android:autoText="true"
-        android:gravity="center_horizontal" />
+        android:gravity="center_horizontal"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>
