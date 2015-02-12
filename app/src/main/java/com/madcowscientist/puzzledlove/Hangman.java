@@ -1,13 +1,22 @@
 package com.madcowscientist.puzzledlove;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 
 public class Hangman extends ActionBarActivity {
+
+    //Setup info to be used at beginnning
+    SharedPreferences SETUP_INFO;
+    //Set global variables
+    String question;
+    String answer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -16,6 +25,18 @@ public class Hangman extends ActionBarActivity {
 
         //Get intent from previous activity
         Intent intent = getIntent();
+
+        //Set the shared preferences for Setup
+        SETUP_INFO = getSharedPreferences("SETUP_INFO", Context.MODE_PRIVATE);
+
+        //Set the question & answer from the user preferences
+        question = SETUP_INFO.getString("Hangman_Question","");
+        answer = SETUP_INFO.getString("Hangman_Answer","");
+        TextView questionTV = (TextView) findViewById(R.id.questionTextView);
+        TextView guessTV = (TextView) findViewById(R.id.guessProgressTextView);
+        //
+        questionTV.setText(question);
+        guessTV.setText(answer);
     }
 
     @Override
