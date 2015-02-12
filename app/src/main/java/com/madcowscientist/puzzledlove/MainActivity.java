@@ -1,6 +1,9 @@
 package com.madcowscientist.puzzledlove;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
@@ -14,6 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.os.Build;
+import android.widget.EditText;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -46,17 +50,20 @@ public class MainActivity extends ActionBarActivity {
             UnlockedEditor.commit();
         }
 
-        //Setup checks
+        //Set the shared preferences for Setup
         SETUP_INFO = getSharedPreferences("SETUP_INFO", Context.MODE_PRIVATE);
         Editor SetupEditor = SETUP_INFO.edit();
-        
+
+        //Checks setup
         if (!SETUP_INFO.contains("User")) {
             SetupEditor.putString("User", null);
             SetupEditor.putString("Lover", null);
             SetupEditor.putString("Hangman_Question", "Question not set");
             SetupEditor.putString("Hangman_Answer", null);
-
         }
+
+        //Ask user to input setup info (for the first time)
+        setInfo();
     }
 
 
@@ -112,4 +119,67 @@ public class MainActivity extends ActionBarActivity {
     }
 
 
+    public void setInfo() {
+        //Set the shared preferences for Setup
+        SETUP_INFO = getSharedPreferences("SETUP_INFO", Context.MODE_PRIVATE);
+        final Editor SetupEditor = SETUP_INFO.edit();
+
+
+        //Checks if setup already submitted
+        if (SETUP_INFO.getString("User", null) != null) {
+            //break out if already filled out
+            return;
+        }
+        else {
+            //Create a dialog for user input
+            AlertDialog.Builder alert = new AlertDialog.Builder(this);
+//            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            // Get the layout inflater
+            LayoutInflater inflater = this.getLayoutInflater();
+
+            // Inflate and set the layout for the dialog
+            // Pass null as the parent view because its going in the dialog layout
+            alert.setView(inflater.inflate(R.layout.dialog_setup, null))
+                    // Add action buttons
+                    .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int id) {
+                            // sign in the user ...
+                        }
+                    });
+
+            alert.setTitle("Fill out for your lover");
+//            alert.setMessage("Message");
+
+            alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int whichButton) {
+                    Dialog alert = (Dialog) dialog;
+                    EditText userText = (EditText) alert.findViewById(R.id.inputUser);
+                    EditText loverText = (EditText) alert.findViewById(R.id.inputLover);
+                    EditText questionText = (EditText) alert.findViewById(R.id.inputHangmanQuestion);
+                    EditText answerText = (EditText) alert.findViewById(R.id.inputHangmanQuestion);
+                    SetupEditor.putString("Lover", loverText.getText().toString());
+                    SetupEditor.putString("User", userText.getText().toString());
+                    SetupEditor.putString("Hangman_Question", questionText.getText().toString());
+                    SetupEditor.putString("Hangman_Question", answerText.getText().toString());
+                    SetupEditor.commit();
+                }
+            });
+
+            alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int whichButton) {
+                    //Cancel
+                    SetupEditor.putString("User", null);
+                    SetupEditor.commit();
+                }
+            });
+
+            alert.create();
+            alert.show();
+
+
+        }
+
+
+    }
 }
