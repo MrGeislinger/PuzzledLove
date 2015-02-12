@@ -149,7 +149,6 @@ public class MainActivity extends ActionBarActivity {
                     });
 
             alert.setTitle("Fill out for your lover");
-//            alert.setMessage("Message");
 
             alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int whichButton) {
@@ -159,18 +158,10 @@ public class MainActivity extends ActionBarActivity {
                     EditText questionText = (EditText) alert.findViewById(R.id.inputHangmanQuestion);
                     EditText answerText = (EditText) alert.findViewById(R.id.inputHangmanQuestion);
 
-//                    SetupEditor.putString("User", userText.getText().toString());
+                    SetupEditor.putString("User", userText.getText().toString());
                     SetupEditor.putString("Lover", loverText.getText().toString());
                     SetupEditor.putString("Hangman_Question", questionText.getText().toString());
                     SetupEditor.putString("Hangman_Question", answerText.getText().toString());
-                    SetupEditor.commit();
-                }
-            });
-
-            alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int whichButton) {
-                    //Cancel
-                    SetupEditor.putString("User", null);
                     SetupEditor.commit();
                 }
             });
