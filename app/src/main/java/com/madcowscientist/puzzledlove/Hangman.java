@@ -9,6 +9,7 @@ import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 
@@ -21,7 +22,8 @@ public class Hangman extends ActionBarActivity {
     String answer;
     String guess;
     String blankSpace = "\u2B1C"; //Blank space -> White Large Square
-    int wrongGuesses = 0; //number of wrong guess
+    int wrongGuesses; //number of wrong guess
+    ImageButton hangmanImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,9 +32,10 @@ public class Hangman extends ActionBarActivity {
 
         //Get intent from previous activity
         Intent intent = getIntent();
-
         //Set the shared preferences for Setup
         SETUP_INFO = getSharedPreferences("SETUP_INFO", Context.MODE_PRIVATE);
+        //Set hangman (heart)
+        hangmanImage = (ImageButton) findViewById(R.id.hangman_heart);
 
         //Set the question & answer from the user preferences (all capitals)
         question = SETUP_INFO.getString("Hangman_Question","").toUpperCase();
@@ -44,6 +47,9 @@ public class Hangman extends ActionBarActivity {
         guess = initGuess(guess);
         questionTV.setText(question);
         guessTV.setText(Html.fromHtml(guess));
+        //Set the heart & wrong guess number
+        hangmanImage.setImageResource(R.drawable.heart0);
+        wrongGuesses = 0;
     }
 
     @Override
@@ -76,9 +82,11 @@ public class Hangman extends ActionBarActivity {
 
     //Run game logic on button press
     public void guessMade(View v) {
-        //Get letter from user guess (make capital
+        //Get letter from user guess (make capital)
         TextView guessView = (TextView) findViewById(R.id.letterGuess);
         String myGuess = guessView.getText().toString().toUpperCase();
+        //Reset guess box
+        guessView.setText("");
         //Check if no letter was given
         //Check that letter was actually given
         //Guess was correct
@@ -95,9 +103,15 @@ public class Hangman extends ActionBarActivity {
 
         }
         //Guess was incorrect
+        else {
             //Increase number of wrong guesses
+            wrongGuesses++;
+            System.out.println(wrongGuesses);
             //Update screen (check if total lost)
-        //Reset guess box
+            int resHeartID = getResources().getIdentifier(
+                    "heart" + wrongGuesses, "drawable", getPackageName());
+            hangmanImage.setImageResource(resHeartID);
+        }
     }
 
     //Test if guess was correct
