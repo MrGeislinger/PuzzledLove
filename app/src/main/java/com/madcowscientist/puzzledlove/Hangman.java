@@ -20,6 +20,7 @@ public class Hangman extends ActionBarActivity {
     String question;
     String answer;
     String guess;
+    String blankSpace = "\u2B1C"; //Blank space -> White Large Square
     int wrongGuesses = 0; //number of wrong guess
 
     @Override
@@ -69,21 +70,34 @@ public class Hangman extends ActionBarActivity {
 
     //Initiate guess string with replacing letters in string
     public String initGuess(String tempStr) {
-        //Blank space -> White Large Square
-        String blankSpace = "\u2B1C";
         //Replace any letters with blank space
         return tempStr.replaceAll("[a-zA-Z]", blankSpace);
     }
 
     //Run game logic on button press
     public void guessMade(View v) {
+        //Get letter from user guess (make capital
+        TextView guessView = (TextView) findViewById(R.id.letterGuess);
+        String myGuess = guessView.getText().toString().toUpperCase();
         //Check if no letter was given
         //Check that letter was actually given
         //Guess was correct
-            //Update guess progress
+        if(guessWasRight(myGuess)) {
+            //Check that guess was a letter
+            if(myGuess.matches("[A-Z]+")) {
+                //Update guess progress
+                updateGuessProgress(myGuess);
+            }
+            //Guess was not a letter
+            else {
+                return;
+            }
+
+        }
         //Guess was incorrect
             //Increase number of wrong guesses
             //Update screen (check if total lost)
+        //Reset guess box
     }
 
     //Test if guess was correct
@@ -95,6 +109,28 @@ public class Hangman extends ActionBarActivity {
             correct = true;
         }
         return correct;
+    }
+
+    //
+    public void updateGuessProgress(String guessString) {
+        int foundIndex = 0 ,lastIndex = 0;
+        //Find all places where guess matches letter in answer
+        while(foundIndex != -1) {
+            System.out.println(guess);
+            foundIndex = answer.indexOf(guessString,lastIndex);
+            lastIndex = foundIndex+1;
+            if( foundIndex != -1){
+                System.out.println("Gues:" + guess+"\n");
+                //Replace at index
+                guess = guess.substring(0,foundIndex) +
+                        guessString +
+                        guess.substring(lastIndex);
+                //Update guess progress
+                TextView guessTV = (TextView) findViewById(R.id.guessProgressTextView);
+                guessTV.setText(Html.fromHtml(guess));
+            }
+
+        }
     }
 
 }

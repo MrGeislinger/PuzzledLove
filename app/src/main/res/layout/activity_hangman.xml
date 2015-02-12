@@ -47,7 +47,6 @@
         android:id="@+id/letterGuess"
         android:gravity="center_vertical|center_horizontal"
         android:maxLength="1"
-        android:text=""
         android:layout_alignParentBottom="true"
         android:layout_alignLeft="@+id/hangman_heart"
         android:layout_alignStart="@+id/hangman_heart"
@@ -59,6 +58,7 @@
         android:layout_height="wrap_content"
         android:text="@string/guessButtonLabel"
         android:id="@+id/guessButton"
+        android:onClick="guessMade"
         android:layout_alignParentBottom="true"
         android:layout_alignRight="@+id/hangman_heart"
         android:layout_alignEnd="@+id/hangman_heart" />
