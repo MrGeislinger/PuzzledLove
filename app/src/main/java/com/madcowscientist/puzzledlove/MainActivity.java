@@ -156,12 +156,12 @@ public class MainActivity extends ActionBarActivity {
                     EditText userText = (EditText) alert.findViewById(R.id.inputUser);
                     EditText loverText = (EditText) alert.findViewById(R.id.inputLover);
                     EditText questionText = (EditText) alert.findViewById(R.id.inputHangmanQuestion);
-                    EditText answerText = (EditText) alert.findViewById(R.id.inputHangmanQuestion);
+                    EditText answerText = (EditText) alert.findViewById(R.id.inputHangmanAnswer);
 
                     SetupEditor.putString("User", userText.getText().toString());
                     SetupEditor.putString("Lover", loverText.getText().toString());
                     SetupEditor.putString("Hangman_Question", questionText.getText().toString());
-                    SetupEditor.putString("Hangman_Question", answerText.getText().toString());
+                    SetupEditor.putString("Hangman_Answer", answerText.getText().toString());
                     SetupEditor.commit();
                 }
             });
