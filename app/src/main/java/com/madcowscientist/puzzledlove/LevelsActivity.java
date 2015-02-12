@@ -93,7 +93,7 @@ public class LevelsActivity extends ActionBarActivity {
         }
     }
 
-
+    //Set button images (and onClick methods) based on unlocked status
     public void setButtonImages() {
         //Set the shared preferences
         UNLOCKED_LEVELS = getSharedPreferences("UNLOCKED_LEVELS", Context.MODE_PRIVATE);
@@ -141,11 +141,25 @@ public class LevelsActivity extends ActionBarActivity {
             //Check media buttons
             //Set to locked icon
             if(UNLOCKED_LEVELS.getBoolean(level + "MediaUNLOCKED", false)) {
-               tempMediaButton.setImageResource(R.drawable.play);
+                tempMediaButton.setImageResource(R.drawable.play);
+                //Set intent to go to the media content
+                tempMediaButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        //View the media content
+                    }
+                });
             }
             //Set to unlocked media icon
             else {
                 tempMediaButton.setImageResource(R.drawable.lock);
+                //Set intent to do nothing on button click
+                tempMediaButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        //Set to no action on click
+                    }
+                });
             }
         }
     }
