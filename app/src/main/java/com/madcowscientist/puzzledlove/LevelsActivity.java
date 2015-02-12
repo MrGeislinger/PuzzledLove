@@ -77,16 +77,20 @@ public class LevelsActivity extends ActionBarActivity {
         setButtonImages();
     }
 
-    /** Called when the user clicks the button_goToTicTacToe */
-    public void goToTicTacToe(View view) {
-        Intent intent = new Intent(this, TicTacToe.class);
-        startActivity(intent);
-    }
-
-    /** Called when the user clicks the button_goToTicTacToe */
-    public void goToHangman(View view) {
-        Intent intent = new Intent(this, Hangman.class);
-        startActivity(intent);
+    /** Generic call to the next game activity */
+    public void goToGame(View view, String className) {
+        Class<?> myClass = null;
+        if(className != null) {
+            className = "com.madcowscientist.puzzledlove." + className;
+            try {
+                myClass = Class.forName(className);
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+            Intent intent;
+            intent = new Intent(this, myClass);
+            startActivity(intent);
+        }
     }
 
 
@@ -99,6 +103,7 @@ public class LevelsActivity extends ActionBarActivity {
         int resGameID, resMediaID;
         ImageButton tempGameButton, tempMediaButton;
         for(String level : LevelStrings) {
+            final String tempStr = level;
             //Set game & media button
             resGameID = getResources().getIdentifier(
                     "button_goTo" + level, "id", getPackageName());
@@ -108,15 +113,29 @@ public class LevelsActivity extends ActionBarActivity {
             tempMediaButton = (ImageButton) findViewById(resMediaID);
 
             //Check game buttons
-            //Set to locked icon
-            if(UNLOCKED_LEVELS.getBoolean(level + "UNLOCKED", false)) {
-                System.out.print(tempGameButton);
-                tempGameButton.setImageResource(R.drawable.unlock);
-                System.out.println(" - end");
-            }
             //Set to unlocked icon
+            if(UNLOCKED_LEVELS.getBoolean(level + "UNLOCKED", false)) {
+                tempGameButton.setImageResource(R.drawable.unlock);
+                //Set intent to go to the game
+                tempGameButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        goToGame(view,tempStr);
+                    }
+                });
+
+            }
+            //Set to locked icon
             else {
                 tempGameButton.setImageResource(R.drawable.lock);
+                //Set intent to do nothing on button click
+                tempGameButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        //Set to no action on click
+                    }
+                });
+
             }
 
             //Check media buttons
