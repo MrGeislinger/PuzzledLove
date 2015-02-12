@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 
@@ -18,6 +19,8 @@ public class Hangman extends ActionBarActivity {
     //Set global variables
     String question;
     String answer;
+    String guess;
+    int wrongGuesses = 0; //number of wrong guess
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,13 +33,13 @@ public class Hangman extends ActionBarActivity {
         //Set the shared preferences for Setup
         SETUP_INFO = getSharedPreferences("SETUP_INFO", Context.MODE_PRIVATE);
 
-        //Set the question & answer from the user preferences
-        question = SETUP_INFO.getString("Hangman_Question","");
-        answer = SETUP_INFO.getString("Hangman_Answer","");
+        //Set the question & answer from the user preferences (all capitals)
+        question = SETUP_INFO.getString("Hangman_Question","").toUpperCase();
+        answer = SETUP_INFO.getString("Hangman_Answer","").toUpperCase();
         TextView questionTV = (TextView) findViewById(R.id.questionTextView);
         TextView guessTV = (TextView) findViewById(R.id.guessProgressTextView);
         //Get initial guess progress string (replaces letters with blank)
-        String guess = answer;
+        guess = answer;
         guess = initGuess(guess);
         questionTV.setText(question);
         guessTV.setText(Html.fromHtml(guess));
@@ -72,6 +75,26 @@ public class Hangman extends ActionBarActivity {
         return tempStr.replaceAll("[a-zA-Z]", blankSpace);
     }
 
+    //Run game logic on button press
+    public void guessMade(View v) {
+        //Check if no letter was given
+        //Check that letter was actually given
+        //Guess was correct
+            //Update guess progress
+        //Guess was incorrect
+            //Increase number of wrong guesses
+            //Update screen (check if total lost)
+    }
 
+    //Test if guess was correct
+    public boolean guessWasRight(String guessStr) {
+        //Default that the guess was wrong
+        boolean correct = false;
+        //Guess is in answer
+        if( answer.contains(guessStr) ) {
+            correct = true;
+        }
+        return correct;
+    }
 
 }
