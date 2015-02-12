@@ -32,24 +32,14 @@ public class Hangman extends ActionBarActivity {
 
         //Get intent from previous activity
         Intent intent = getIntent();
+
         //Set the shared preferences for Setup
         SETUP_INFO = getSharedPreferences("SETUP_INFO", Context.MODE_PRIVATE);
         //Set hangman (heart)
-        hangmanImage = (ImageButton) findViewById(R.id.hangman_heart);
+        hangmanImage = (ImageButton) findViewById(R.id.hangman_heart); && git
 
-        //Set the question & answer from the user preferences (all capitals)
-        question = SETUP_INFO.getString("Hangman_Question","").toUpperCase();
-        answer = SETUP_INFO.getString("Hangman_Answer","").toUpperCase();
-        TextView questionTV = (TextView) findViewById(R.id.questionTextView);
-        TextView guessTV = (TextView) findViewById(R.id.guessProgressTextView);
-        //Get initial guess progress string (replaces letters with blank)
-        guess = answer;
-        guess = initGuess(guess);
-        questionTV.setText(question);
-        guessTV.setText(Html.fromHtml(guess));
-        //Set the heart & wrong guess number
-        hangmanImage.setImageResource(R.drawable.heart0);
-        wrongGuesses = 0;
+        //Reset the game play
+        resetGame();
     }
 
     @Override
@@ -72,6 +62,23 @@ public class Hangman extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    //Reset game
+    public void resetGame() {
+        //Set the heart & wrong guess number
+        hangmanImage.setImageResource(R.drawable.heart0);
+        wrongGuesses = 0;
+        //Set the question & answer from the user preferences (all capitals)
+        question = SETUP_INFO.getString("Hangman_Question","").toUpperCase();
+        answer = SETUP_INFO.getString("Hangman_Answer","").toUpperCase();
+        TextView questionTV = (TextView) findViewById(R.id.questionTextView);
+        TextView guessTV = (TextView) findViewById(R.id.guessProgressTextView);
+        //Get initial guess progress string (replaces letters with blank)
+        guess = answer;
+        guess = initGuess(guess);
+        questionTV.setText(question);
+        guessTV.setText(Html.fromHtml(guess));
     }
 
     //Initiate guess string with replacing letters in string
