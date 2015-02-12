@@ -35,9 +35,11 @@ public class Hangman extends ActionBarActivity {
         answer = SETUP_INFO.getString("Hangman_Answer","");
         TextView questionTV = (TextView) findViewById(R.id.questionTextView);
         TextView guessTV = (TextView) findViewById(R.id.guessProgressTextView);
-        //
+        //Get initial guess progress string (replaces letters with blank)
+        String guess = answer;
+        guess = initGuess(guess);
         questionTV.setText(question);
-        guessTV.setText(Html.fromHtml(answer));
+        guessTV.setText(Html.fromHtml(guess));
     }
 
     @Override
@@ -62,6 +64,13 @@ public class Hangman extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    //Initiate guess string with replacing letters in string
+    public String initGuess(String tempStr) {
+        //Blank space -> White Large Square
+        String blankSpace = "\u2B1C";
+        //Replace any letters with blank space
+        return tempStr.replaceAll("[a-zA-Z]", blankSpace);
+    }
 
 
 
