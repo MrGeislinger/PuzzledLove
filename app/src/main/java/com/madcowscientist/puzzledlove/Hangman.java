@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -36,7 +37,7 @@ public class Hangman extends ActionBarActivity {
         TextView guessTV = (TextView) findViewById(R.id.guessProgressTextView);
         //
         questionTV.setText(question);
-        guessTV.setText(answer);
+        guessTV.setText(Html.fromHtml(answer));
     }
 
     @Override
@@ -60,4 +61,8 @@ public class Hangman extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+
+
+
 }
