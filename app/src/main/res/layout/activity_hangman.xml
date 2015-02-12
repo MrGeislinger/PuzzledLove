@@ -51,14 +51,14 @@
         android:layout_alignParentBottom="true"
         android:layout_alignLeft="@+id/hangman_heart"
         android:layout_alignStart="@+id/hangman_heart"
-        android:layout_toLeftOf="@+id/button"
-        android:layout_toStartOf="@+id/button" />
+        android:layout_toLeftOf="@+id/guessButton"
+        android:layout_toStartOf="@+id/guessButton" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Guess"
-        android:id="@+id/button"
+        android:text="@string/guessButtonLabel"
+        android:id="@+id/guessButton"
         android:layout_alignParentBottom="true"
         android:layout_alignRight="@+id/hangman_heart"
         android:layout_alignEnd="@+id/hangman_heart" />
@@ -71,7 +71,7 @@
         android:id="@+id/guessProgressTextView"
         android:layout_below="@+id/questionTextView"
         android:layout_marginTop="36dp"
-        android:layout_above="@+id/button"
+        android:layout_above="@+id/guessButton"
         android:layout_alignLeft="@+id/textView_Title"
         android:layout_alignStart="@+id/textView_Title"
         android:layout_alignRight="@+id/textView_Title"

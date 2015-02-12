@@ -24,5 +24,6 @@
     <string name="hangman_title">Break My Heart</string>
     <string name="questionText">Question</string>
     <string name="guessProgress" />
+    <string name="guessButtonLabel">Guess</string>
 
 </resources>
