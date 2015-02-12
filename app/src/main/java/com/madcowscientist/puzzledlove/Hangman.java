@@ -103,6 +103,7 @@ public class Hangman extends ActionBarActivity {
             if(myGuess.matches("[A-Z]+")) {
                 //Update guess progress
                 updateGuessProgress(myGuess);
+                isGameWon();
             }
             //Guess was not a letter, so do nothing
         }
@@ -122,8 +123,17 @@ public class Hangman extends ActionBarActivity {
 
     }
 
+    //Test if game has been won
+    public void isGameWon() {
+        if(guess.equals(answer)) {
+            //Present dialog that game has been won
+            System.out.println("WON================");
+            //Unlock media (and next level?)
+        }
+    }
+
     //Test to see if game has been lost
-    public void isGameLost(){
+    public void isGameLost() {
         if(wrongGuesses == MAX_WRONG){
             //Present a losing dialog
             //Reset game
