@@ -23,6 +23,7 @@ public class Hangman extends ActionBarActivity {
     String guess;
     String blankSpace = "\u2B1C"; //Blank space -> White Large Square
     int wrongGuesses; //number of wrong guess
+    int MAX_WRONG = 9; //most guesses that can be wrong before game ends
     ImageButton hangmanImage;
 
     @Override
@@ -36,7 +37,7 @@ public class Hangman extends ActionBarActivity {
         //Set the shared preferences for Setup
         SETUP_INFO = getSharedPreferences("SETUP_INFO", Context.MODE_PRIVATE);
         //Set hangman (heart)
-        hangmanImage = (ImageButton) findViewById(R.id.hangman_heart); && git
+        hangmanImage = (ImageButton) findViewById(R.id.hangman_heart);
 
         //Reset the game play
         resetGame();
@@ -103,11 +104,7 @@ public class Hangman extends ActionBarActivity {
                 //Update guess progress
                 updateGuessProgress(myGuess);
             }
-            //Guess was not a letter
-            else {
-                return;
-            }
-
+            //Guess was not a letter, so do nothing
         }
         //Guess was incorrect
         else {
@@ -118,6 +115,19 @@ public class Hangman extends ActionBarActivity {
             int resHeartID = getResources().getIdentifier(
                     "heart" + wrongGuesses, "drawable", getPackageName());
             hangmanImage.setImageResource(resHeartID);
+            //Check if game was lost
+            isGameLost();
+        }
+
+
+    }
+
+    //Test to see if game has been lost
+    public void isGameLost(){
+        if(wrongGuesses == MAX_WRONG){
+            //Present a losing dialog
+            //Reset game
+            resetGame();
         }
     }
 
