@@ -1,6 +1,8 @@
 package com.madcowscientist.puzzledlove;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.ActionBarActivity;
@@ -25,6 +27,7 @@ public class Hangman extends ActionBarActivity {
     int wrongGuesses; //number of wrong guess
     int MAX_WRONG = 9; //most guesses that can be wrong before game ends
     ImageButton hangmanImage;
+    AlertDialog.Builder alertDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +41,15 @@ public class Hangman extends ActionBarActivity {
         SETUP_INFO = getSharedPreferences("SETUP_INFO", Context.MODE_PRIVATE);
         //Set hangman (heart)
         hangmanImage = (ImageButton) findViewById(R.id.hangman_heart);
+
+        ////Display end game message
+        alertDialog = new AlertDialog.Builder(Hangman.this);
+        //Reset button in dialog
+        alertDialog.setPositiveButton("Reset Game", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                resetGame();
+            }
+        });
 
         //Reset the game play
         resetGame();
@@ -103,7 +115,6 @@ public class Hangman extends ActionBarActivity {
             if(myGuess.matches("[A-Z]+")) {
                 //Update guess progress
                 updateGuessProgress(myGuess);
-                isGameWon();
             }
             //Guess was not a letter, so do nothing
         }
@@ -116,29 +127,46 @@ public class Hangman extends ActionBarActivity {
             int resHeartID = getResources().getIdentifier(
                     "heart" + wrongGuesses, "drawable", getPackageName());
             hangmanImage.setImageResource(resHeartID);
-            //Check if game was lost
-            isGameLost();
         }
+        //Check to see if the game has been lost or won
+        gameIsDone();
+    }
 
-
+    //Game complete (win or lose)
+    public void gameIsDone() {
+        if( isGameLost() || isGameWon() ) {
+            //Display Message
+            alertDialog.show();
+        }
     }
 
     //Test if game has been won
-    public void isGameWon() {
+    public boolean isGameWon() {
         if(guess.equals(answer)) {
             //Present dialog that game has been won
-            System.out.println("WON================");
+            alertDialog.setTitle("You Won!");
+            alertDialog.setMessage("You won the game! Go back to the main menu to see what you unlocked!");
             //Unlock media (and next level?)
+            //Set the shared preferences
+            SharedPreferences UNLOCKED_LEVELS = getSharedPreferences("UNLOCKED_LEVELS", Context.MODE_PRIVATE);
+            SharedPreferences.Editor UnlockedEditor = UNLOCKED_LEVELS.edit();
+            //Allow user to view media & new game since she won1
+            UnlockedEditor.putBoolean("HangmanMediaUNLOCKED", true);
+            UnlockedEditor.commit();
+            return true;
         }
+        return false;
     }
 
     //Test to see if game has been lost
-    public void isGameLost() {
+    public boolean isGameLost() {
         if(wrongGuesses == MAX_WRONG){
             //Present a losing dialog
-            //Reset game
-            resetGame();
+            alertDialog.setTitle("You Lost...");
+            alertDialog.setMessage("You didn't guess it... Want to try again?");
+            return true;
         }
+        return false;
     }
 
     //Test if guess was correct
