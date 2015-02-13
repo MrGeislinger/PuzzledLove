@@ -26,5 +26,6 @@
     <string name="guessProgress"></string>
     <string name="guessButtonLabel">Guess</string>
     <string name="title_activity_tic_tac_toe_media">TicTacToeMedia</string>
+    <string name="title_activity_hangman_media">HangmanMedia</string>
 
 </resources>

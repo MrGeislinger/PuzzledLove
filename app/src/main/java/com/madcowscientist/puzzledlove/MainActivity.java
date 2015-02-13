@@ -225,7 +225,6 @@ public class MainActivity extends ActionBarActivity {
 //                    Bitmap yourSelectedImage = BitmapFactory.decodeStream(imageStream);
 
                 }
-                return;
             case SELECT_VIDEO_Hangman:
                 if(resultCode == RESULT_OK){
                     Uri selectedImage = imageReturnedIntent.getData();
