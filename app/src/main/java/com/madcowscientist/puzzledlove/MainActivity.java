@@ -7,6 +7,11 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.provider.MediaStore;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -19,6 +24,9 @@ import android.view.ViewGroup;
 import android.os.Build;
 import android.widget.EditText;
 
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+
 
 public class MainActivity extends ActionBarActivity {
 
@@ -26,6 +34,10 @@ public class MainActivity extends ActionBarActivity {
     SharedPreferences UNLOCKED_LEVELS;
     //Setup info to be used at beginnning
     SharedPreferences SETUP_INFO;
+    //
+    private static final int SELECT_VIDEO_TicTacToe = 100;
+    private static final int SELECT_VIDEO_Hangman   = 200;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -163,6 +175,20 @@ public class MainActivity extends ActionBarActivity {
                     SetupEditor.putString("Hangman_Question", questionText.getText().toString());
                     SetupEditor.putString("Hangman_Answer", answerText.getText().toString());
                     SetupEditor.commit();
+
+                    //New dialog to pick media for TicTacToe
+                    Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
+                    photoPickerIntent.setType("video/*");
+                    photoPickerIntent.setAction(Intent.ACTION_GET_CONTENT);
+                    startActivityForResult(photoPickerIntent, SELECT_VIDEO_TicTacToe);
+
+                    //New dialog to pick media for TicTacToe
+                    photoPickerIntent = new Intent(Intent.ACTION_PICK);
+                    photoPickerIntent.setType("video/*");
+                    photoPickerIntent.setAction(Intent.ACTION_GET_CONTENT);
+                    startActivityForResult(photoPickerIntent, SELECT_VIDEO_Hangman);
+
+
                 }
             });
 
@@ -173,5 +199,61 @@ public class MainActivity extends ActionBarActivity {
         }
 
 
+
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent imageReturnedIntent) {
+        super.onActivityResult(requestCode, resultCode, imageReturnedIntent);
+
+        switch(requestCode) {
+            case SELECT_VIDEO_TicTacToe:
+                if(resultCode == RESULT_OK){
+                    Uri selectedImage = imageReturnedIntent.getData();
+//                    InputStream imageStream = null;
+//                    try {
+//                        imageStream = getContentResolver().openInputStream(selectedImage);
+                        //Set the shared preferences for Setup
+                        SETUP_INFO = getSharedPreferences("SETUP_INFO", Context.MODE_PRIVATE);
+                        final Editor SetupEditor = SETUP_INFO.edit();
+                        System.out.println("URI=========================="+getPath(selectedImage));
+                        SetupEditor.putString("TicTacToe_Media", getPath(selectedImage));
+                        SetupEditor.commit();
+//                    } catch (FileNotFoundException e) {
+//                        e.printStackTrace();
+//                    }
+//                    Bitmap yourSelectedImage = BitmapFactory.decodeStream(imageStream);
+
+                }
+                return;
+            case SELECT_VIDEO_Hangman:
+                if(resultCode == RESULT_OK){
+                    Uri selectedImage = imageReturnedIntent.getData();
+                    InputStream imageStream = null;
+                    try {
+                        imageStream = getContentResolver().openInputStream(selectedImage);
+                        //Set the shared preferences for Setup
+                        SETUP_INFO = getSharedPreferences("SETUP_INFO", Context.MODE_PRIVATE);
+                        final Editor SetupEditor = SETUP_INFO.edit();
+                        SetupEditor.putString("Hangman_Media", getPath(selectedImage));
+                        SetupEditor.commit();
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
+//                    Bitmap yourSelectedImage = BitmapFactory.decodeStream(imageStream);
+
+                }
+        }
+    }
+
+
+    //
+    public String getPath(Uri uri) {
+        String[] projection = { MediaStore.Images.Media.DATA };
+        Cursor cursor = managedQuery(uri, projection, null, null, null);
+        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+        cursor.moveToFirst();
+        return cursor.getString(column_index);
+    }
+
 }

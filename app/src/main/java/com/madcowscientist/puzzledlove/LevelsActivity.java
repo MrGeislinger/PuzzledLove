@@ -93,11 +93,26 @@ public class LevelsActivity extends ActionBarActivity {
         }
     }
 
+    /** Generic call to the next game activity */
+    public void goToMedia(View view, String className) {
+        Class<?> myClass = null;
+        if(className != null) {
+            className = "com.madcowscientist.puzzledlove." + className;
+            try {
+                myClass = Class.forName(className);
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+            Intent intent;
+            intent = new Intent(this, myClass);
+            startActivity(intent);
+        }
+    }
+
     //Set button images (and onClick methods) based on unlocked status
     public void setButtonImages() {
         //Set the shared preferences
         UNLOCKED_LEVELS = getSharedPreferences("UNLOCKED_LEVELS", Context.MODE_PRIVATE);
-        SharedPreferences.Editor UnlockedEditor = UNLOCKED_LEVELS.edit();
 
         //Check the unlocked preferences to update the (game & media) buttons
         int resGameID, resMediaID;
@@ -147,6 +162,7 @@ public class LevelsActivity extends ActionBarActivity {
                     @Override
                     public void onClick(View view) {
                         //View the media content
+                        goToMedia(view,tempStr+"Media");
                     }
                 });
             }
